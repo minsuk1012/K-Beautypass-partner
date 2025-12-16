@@ -16,7 +16,7 @@ import DocsPage from './components/DocsPage';
 
 // Updated BrandLogo to use the uploaded Logo.png
 const BrandLogo: React.FC<{ className?: string }> = ({ className = "w-8 h-8" }) => (
-  <img src="/Logo.png" alt="K-Beauty Pass Logo" className={`${className} object-contain`} />
+  <img src="/favicon.svg" alt="K-Beauty Pass Logo" className={`${className} object-contain`} />
 );
 
 type Page = 'landing' | 'docs';
