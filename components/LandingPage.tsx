@@ -442,12 +442,13 @@ export const LandingPage = () => {
           <div className="mb-8 inline-block p-4 rounded-full bg-brand-lightblue text-brand-blue animate-bounce">
               <Stethoscope className="w-8 h-8" />
           </div>
-          <h2 className="text-4xl md:text-6xl font-heading font-black text-slate-900 mb-8">
-            지금 바로, <br/> 글로벌 병원으로 도약하세요.
+          <h2 className="text-3xl md:text-5xl font-heading font-black text-slate-900 mb-8 leading-tight">
+            입점비 Zero, <br/>
+            수수료는 <span className="text-brand-blue">오직 매출이 발생할 때만</span>
           </h2>
-          <p className="text-xl text-slate-600 mb-12">
-            입점비 0원, 초기 마케팅 비용 0원. <br/>
-            실제 매출이 발생했을 때만 수수료가 발생합니다.
+          <p className="text-lg md:text-xl text-slate-600 mb-12">
+            복잡한 서류 절차는 필요 없습니다. <br/>
+            온라인 양식 제출 한 번으로 가장 빠르고 간편하게 입점 신청을 완료하세요.
           </p>
           
           <div className="flex flex-col sm:flex-row justify-center gap-4">
