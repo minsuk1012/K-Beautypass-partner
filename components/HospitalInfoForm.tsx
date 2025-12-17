@@ -20,11 +20,14 @@ interface HospitalInfo {
     interior_files?: File[];
     logo_preview?: string;
     interior_previews?: string[];
+    logo_url?: string;
+    interior_images?: string[];
 }
 
 interface Props {
     info: HospitalInfo;
     onChange: (field: keyof HospitalInfo, value: any) => void;
+    onRemoveImage?: (url: string) => void;
 }
 
 const DISTRICTS = [
@@ -35,7 +38,7 @@ const DISTRICTS = [
 
 import { Upload, X, Image as ImageIcon } from 'lucide-react';
 
-export default function HospitalInfoForm({ info, onChange }: Props) {
+export default function HospitalInfoForm({ info, onChange, onRemoveImage }: Props) {
     
     const handleLogoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
@@ -92,11 +95,20 @@ export default function HospitalInfoForm({ info, onChange }: Props) {
     };
 
     const removeLogo = () => {
+        if (info.logo_url && onRemoveImage) {
+            if (confirm('저장된 로고 이미지를 삭제하시겠습니까? (즉시 삭제됩니다)')) {
+                onRemoveImage(info.logo_url);
+            } else {
+                return;
+            }
+        }
         onChange('logo_file', null);
         onChange('logo_preview', '');
+        onChange('logo_url', '');
     };
 
     const removeInterior = (index: number) => {
+        // This handles removal of NEWLY added files (previews)
         const newFiles = [...(info.interior_files || [])];
         newFiles.splice(index, 1);
         const newPreviews = [...(info.interior_previews || [])];
@@ -105,6 +117,21 @@ export default function HospitalInfoForm({ info, onChange }: Props) {
         onChange('interior_files', newFiles);
         onChange('interior_previews', newPreviews);
     };
+
+    const removeExistingInterior = (index: number) => {
+        const urlToRemove = (info.interior_images || [])[index];
+        
+        if (confirm('저장된 이미지를 삭제하시겠습니까? (즉시 삭제됩니다)')) {
+            if (urlToRemove && onRemoveImage) {
+                onRemoveImage(urlToRemove);
+            }
+            const newImages = [...(info.interior_images || [])];
+            newImages.splice(index, 1);
+            onChange('interior_images', newImages);
+        }
+    };
+
+    const logoDisplay = info.logo_preview || info.logo_url;
 
     return (
         <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-200">
@@ -300,9 +327,9 @@ export default function HospitalInfoForm({ info, onChange }: Props) {
                         <div>
                             <div className="text-xs font-bold text-slate-600 mb-2">병원 로고 (1장) <span className="text-xs text-slate-400 font-normal">5MB 이하</span></div>
                             
-                            {info.logo_preview ? (
+                            {logoDisplay ? (
                                 <div className="relative w-32 h-32 border rounded-lg overflow-hidden group">
-                                     <img src={info.logo_preview} alt="Logo" className="w-full h-full object-contain bg-slate-50" />
+                                     <img src={logoDisplay} alt="Logo" className="w-full h-full object-contain bg-slate-50" />
                                      <button onClick={removeLogo} className="absolute top-1 right-1 bg-black/50 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity">
                                          <X className="w-4 h-4" />
                                      </button>
@@ -320,16 +347,28 @@ export default function HospitalInfoForm({ info, onChange }: Props) {
                         <div className="md:col-span-2">
                             <div className="text-xs font-bold text-slate-600 mb-2">원내 이미지 (최대 5장) <span className="text-xs text-slate-400 font-normal">5MB 이하</span></div>
                             <div className="flex flex-wrap gap-4">
+                                {/* Existing Images */}
+                                {(info.interior_images || []).map((imgUrl, idx) => (
+                                     <div key={`existing-${idx}`} className="relative w-32 h-32 border rounded-lg overflow-hidden group">
+                                          <img src={imgUrl} alt={`Interior Existing ${idx}`} className="w-full h-full object-cover" />
+                                          <div className="absolute top-0 left-0 bg-blue-500 text-white text-[10px] px-1.5 py-0.5 rounded-br">저장됨</div>
+                                          <button onClick={() => removeExistingInterior(idx)} className="absolute top-1 right-1 bg-black/50 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                                              <X className="w-4 h-4" />
+                                          </button>
+                                     </div>
+                                ))}
+
+                                {/* New Previews */}
                                 {(info.interior_previews || []).map((preview, idx) => (
-                                     <div key={idx} className="relative w-32 h-32 border rounded-lg overflow-hidden group">
-                                          <img src={preview} alt={`Interior ${idx}`} className="w-full h-full object-cover" />
+                                     <div key={`new-${idx}`} className="relative w-32 h-32 border rounded-lg overflow-hidden group">
+                                          <img src={preview} alt={`Interior New ${idx}`} className="w-full h-full object-cover" />
                                           <button onClick={() => removeInterior(idx)} className="absolute top-1 right-1 bg-black/50 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity">
                                               <X className="w-4 h-4" />
                                           </button>
                                      </div>
                                 ))}
                                 
-                                {(!info.interior_files || info.interior_files.length < 5) && (
+                                {((info.interior_images?.length || 0) + (info.interior_files?.length || 0) < 5) && (
                                     <label className="w-32 h-32 flex flex-col items-center justify-center border-2 border-dashed border-slate-300 rounded-lg cursor-pointer hover:bg-slate-50 hover:border-brand-blue transition-colors group text-slate-400 hover:text-brand-blue">
                                         <Upload className="w-6 h-6 mb-2" />
                                         <span className="text-xs font-medium">이미지 추가</span>

@@ -39,6 +39,8 @@ interface HospitalInfo {
     interior_files?: File[];
     logo_preview?: string;
     interior_previews?: string[];
+    logo_url?: string;
+    interior_images?: string[];
 }
 
 interface Props {
@@ -199,11 +201,12 @@ export default function PartnerOnboardingForm({ categories, variations, initialP
 
             const { error: uploadError } = await supabase.storage
                 .from('partner-images')
-                .upload(filePath, file);
+                .upload(filePath, file, { upsert: true });
 
             if (uploadError) {
                 console.error('Upload error:', uploadError);
-                throw uploadError;
+                alert(`이미지 업로드 실패: ${uploadError.message}`);
+                return null;
             }
 
             const { data } = supabase.storage
@@ -211,8 +214,9 @@ export default function PartnerOnboardingForm({ categories, variations, initialP
                 .getPublicUrl(filePath);
 
             return data.publicUrl;
-        } catch (error) {
+        } catch (error: any) {
             console.error('File upload failed:', error);
+            alert(`이미지 업로드 오류: ${error.message}`);
             return null;
         }
     };
@@ -381,6 +385,29 @@ export default function PartnerOnboardingForm({ categories, variations, initialP
         );
     }
 
+    const handleRemoveImage = async (url: string) => {
+        try {
+            // Extract filename from URL
+            // URL format: .../partner-images/FILENAME
+            const fileName = url.split('/').pop();
+            if (!fileName) return;
+
+            const { error } = await supabase.storage
+                .from('partner-images')
+                .remove([fileName]);
+
+            if (error) {
+                console.error('Delete error:', error);
+                alert(`이미지 삭제 실패: ${error.message}`);
+            } else {
+                console.log('Image deleted from storage:', fileName);
+            }
+        } catch (e: any) {
+             console.error('Delete exception:', e);
+             alert(`삭제 중 오류: ${e.message}`);
+        }
+    };
+
     return (
         <div className="max-w-5xl mx-auto relative px-4">
             
@@ -416,7 +443,11 @@ export default function PartnerOnboardingForm({ categories, variations, initialP
             <div className="mb-6">
                 {activeTab === 'hospital' ? (
                      <div className="animate-in fade-in slide-in-from-bottom-2 duration-300">
-                        <HospitalInfoForm info={hospitalInfo} onChange={updateHospitalInfo} />
+                        <HospitalInfoForm 
+                            info={hospitalInfo} 
+                            onChange={updateHospitalInfo} 
+                            onRemoveImage={handleRemoveImage}
+                        />
                      </div>
                 ) : (
                     <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden animate-in fade-in slide-in-from-bottom-2 duration-300">

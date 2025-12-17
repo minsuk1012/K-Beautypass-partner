@@ -198,13 +198,6 @@ async function sendSlackNotification(hospital: any, products: any[]) {
     const webhookUrl = process.env.SLACK_WEBHOOK_URL;
     if (!webhookUrl) return;
 
-    const productSummary = products.map(p => {
-        const pricings = p.pricings.map((pr: any) => 
-            `- ${pr.description}: ${parseInt(pr.price).toLocaleString()}원${pr.promotion_price ? ` (할인가: ${parseInt(pr.promotion_price).toLocaleString()}원)` : ''}`
-        ).join('\n');
-        return `*${p.name}*\n${pricings}`;
-    }).join('\n\n');
-
     const payload = {
         text: "새로운 병원 입점 신청이 접수되었습니다! 🎉",
         blocks: [
@@ -256,14 +249,13 @@ async function sendSlackNotification(hospital: any, products: any[]) {
                 ]
             },
             {
-                type: "divider"
-            },
-            {
                 type: "section",
-                text: {
-                    type: "mrkdwn",
-                    text: `*등록된 시술 상품 (${products.length}개)*\n\n${productSummary}`
-                }
+                fields: [
+                    {
+                        type: "mrkdwn",
+                        text: `*등록된 시술 상품 수:*\n${products.length}개`
+                    }
+                ]
             },
             {
                 type: "actions",
