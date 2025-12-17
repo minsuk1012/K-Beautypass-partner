@@ -7,7 +7,11 @@ import Link from 'next/link';
 import { BrandLogo } from './BrandLogo';
 import { usePathname, useRouter } from 'next/navigation';
 
-export const Navbar = () => {
+interface Props {
+  isLoggedIn: boolean;
+}
+
+export const Navbar = ({ isLoggedIn }: Props) => {
   const { scrollYProgress } = useScroll();
   const headerY = useTransform(scrollYProgress, [0, 0.2], [0, -20]);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -58,6 +62,12 @@ export const Navbar = () => {
               </button>
             ))}
             
+            <Link
+              href="/partner/onboarding"
+              className="text-sm font-semibold text-slate-600 hover:text-brand-blue transition-colors"
+            >
+              병원 입점 신청
+            </Link>
             <Link 
               href="https://vitalconnect.k-beautypass.com/"
               target="_blank"
@@ -74,13 +84,25 @@ export const Navbar = () => {
               <FileText className="w-4 h-4" /> 가이드
             </Link>
 
-            <button 
-              onClick={() => scrollToSection('contact')}
-              className="bg-brand-dark text-white px-5 py-2.5 rounded-lg text-sm font-bold hover:bg-slate-800 transition-all shadow-lg shadow-brand-dark/10"
-              type="button"
-            >
-              파트너 로그인
-            </button>
+            {isLoggedIn ? (
+                <button 
+                  onClick={async () => {
+                      // Simple logout by clearing cookie and reload - ideally should be a server action or client handler calling API
+                      document.cookie = 'partner_user_id=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+                      window.location.href = '/';
+                  }}
+                  className="bg-slate-100 text-slate-600 px-5 py-2.5 rounded-lg text-sm font-bold hover:bg-slate-200 transition-all"
+                >
+                  로그아웃
+                </button>
+            ) : (
+                <Link
+                  href="/partner/login"
+                  className="bg-brand-dark text-white px-5 py-2.5 rounded-lg text-sm font-bold hover:bg-slate-800 transition-all shadow-lg shadow-brand-dark/10"
+                >
+                  파트너 로그인
+                </Link>
+            )}
           </div>
 
           {/* Mobile Menu Toggle */}

@@ -3,20 +3,32 @@
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
+import { supabaseAdmin } from '@/lib/supabaseAdmin';
+
 export async function login(formData: FormData) {
   const id = formData.get('id');
   const password = formData.get('password');
+  
+  if (!id || !password) {
+      return { error: 'Please enter both ID and password' };
+  }
 
-  if (id === 'kbeautypass' && password === 'kbeautypass123!') {
+  const { data: admin, error } = await supabaseAdmin
+      .from('admins')
+      .select('*')
+      .eq('username', id)
+      .eq('password_hash', password) // Storing plain text for this prototype as requested
+      .single();
+
+  if (admin && !error) {
     const cookieStore = await cookies();
-    cookieStore.set('admin_session', 'true', { 
+    cookieStore.set('admin_session', admin.id, { 
       httpOnly: true, 
       secure: process.env.NODE_ENV === 'production',
       maxAge: 60 * 60 * 24 // 1 day
     });
-    redirect('/admin');
+    return { success: true };
   } else {
-    // In a real app we might return an error state, but for simple redirection/re-render:
     return { error: 'Invalid credentials' };
   }
 }

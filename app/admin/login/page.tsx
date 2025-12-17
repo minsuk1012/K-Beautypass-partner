@@ -3,10 +3,12 @@
 import React, { useState } from 'react';
 import { login } from '../actions';
 import { BrandLogo } from '@/components/BrandLogo';
+import { useRouter } from 'next/navigation';
 
 export default function LoginPage() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   const handleSubmit = async (formData: FormData) => {
     setLoading(true);
@@ -14,7 +16,9 @@ export default function LoginPage() {
     
     try {
       const result = await login(formData);
-      if (result?.error) {
+      if (result?.success) {
+        router.push('/admin');
+      } else if (result?.error) {
         setError(result.error);
         setLoading(false);
       }

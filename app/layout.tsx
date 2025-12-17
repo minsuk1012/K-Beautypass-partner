@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { Navbar } from '@/components/Navbar';
+import { cookies } from 'next/headers';
 import { Footer } from '@/components/Footer';
 import FluidBackground from '@/components/FluidBackground';
 export const metadata: Metadata = {
@@ -11,7 +12,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -25,7 +26,7 @@ export default function RootLayout({
       </head>
       <body className="font-sans bg-slate-50 text-slate-800 overflow-x-hidden selection:bg-brand-lightblue selection:text-brand-blue">
         <FluidBackground />
-        <Navbar />
+        <Navbar isLoggedIn={!!(await cookies()).get('partner_user_id')?.value} />
         {children}
         <Footer />
       </body>
