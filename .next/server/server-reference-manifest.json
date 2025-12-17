@@ -1,5 +1,43 @@
 {
-  "node": {},
+  "node": {
+    "00f4fbd8e2e5a8bd5aa2749f7bafff50f3abc8039c": {
+      "workers": {
+        "app/admin/page": {
+          "moduleId": 4100,
+          "async": false,
+          "exportedName": "logout",
+          "filename": "app/admin/actions.ts"
+        }
+      },
+      "layer": {
+        "app/admin/page": "rsc"
+      },
+      "filename": "app/admin/actions.ts",
+      "exportedName": "logout"
+    },
+    "4069046eb83ac7c9fde74d2770d79e1ed1e1a8c825": {
+      "workers": {
+        "app/admin/login/page": {
+          "moduleId": 60906,
+          "async": false,
+          "exportedName": "login",
+          "filename": "app/admin/actions.ts"
+        },
+        "app/admin/page": {
+          "moduleId": 4100,
+          "async": false,
+          "exportedName": "login",
+          "filename": "app/admin/actions.ts"
+        }
+      },
+      "layer": {
+        "app/admin/login/page": "action-browser",
+        "app/admin/page": "rsc"
+      },
+      "filename": "app/admin/actions.ts",
+      "exportedName": "login"
+    }
+  },
   "edge": {},
   "encryptionKey": "AJcda3SpL2qU8CzNAr4rlLDVwkT/4RsvUwJ0qUOmeLE="
 }
