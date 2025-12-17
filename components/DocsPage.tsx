@@ -2,18 +2,22 @@
  * @license
  * SPDX-License-Identifier: Apache-2.0
 */
+'use client';
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { MockHospitalChatRoom } from './MockChatInterface';
+
 import { 
   FileText, Calendar, DollarSign, CheckCircle, 
   MessageSquare, Settings, ChevronRight, Play, 
-  Zap, Globe, LayoutDashboard, CreditCard, HelpCircle, User
+  Zap, Globe, LayoutDashboard, CreditCard, HelpCircle, User, Copy,
+  Bell, Ticket, ShoppingBag, Star, Users, LogOut, Map
 } from 'lucide-react';
 
 // --- Types ---
 
-type DocId = 'reservation' | 'chat' | 'admin';
+type DocId = 'reservation' | 'chat' | 'admin' | 'test-account' | 'direct-chat';
 
 interface DocSection {
   id: string;
@@ -167,9 +171,225 @@ const MockReport = () => (
   </div>
 );
 
+const MockMyPage = () => {
+  const user = { 
+    name: "Test User", 
+    email: "test_user@example.com", 
+    gender: 'female' 
+  };
+  const stats = { 
+    total_reservations: 2, 
+    available_coupons_count: 5 
+  };
+
+  const MenuLink = ({ icon: Icon, label }: { icon: any, label: string }) => (
+    <div className="flex items-center justify-between py-4 border-b border-gray-50 hover:bg-gray-50 px-1 transition-colors cursor-pointer group">
+       <div className="flex items-center gap-3">
+          <Icon size={20} className="text-gray-400 group-hover:text-gray-600" />
+          <span className="text-sm font-medium text-gray-700 group-hover:text-gray-900">{label}</span>
+       </div>
+       <ChevronRight size={18} className="text-gray-300 group-hover:text-gray-400" />
+    </div>
+  );
+
+  return (
+    <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden my-6 max-w-sm mx-auto relative pb-8">
+      
+      {/* 1. Header (Notification) */}
+      <div className="px-4 py-4 flex justify-end">
+         <div className="relative p-1 cursor-pointer">
+             <Bell size={22} className="text-gray-400" />
+             <span className="absolute top-0 right-0 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-white"></span>
+         </div>
+      </div>
+
+      {/* 2. Profile Section */}
+      <div className="px-5 mb-8 flex items-center gap-4">
+         {/* Avatar Placeholder */}
+         <div className="w-16 h-16 rounded-full bg-gray-100 overflow-hidden border border-gray-100 flex items-center justify-center">
+            <img src="/female_avatar_3d.png" alt="User Avatar" className="w-full h-full object-cover" />
+         </div>
+         <div>
+            <h2 className="text-xl font-bold text-gray-900">{user.name}</h2>
+            <p className="text-xs text-gray-400 mb-1">{user.email}</p>
+            <div className="text-[10px] font-bold text-gray-600 flex items-center gap-1 hover:text-purple-600 transition-colors cursor-pointer">
+                Edit Profile <ChevronRight size={10} />
+            </div>
+         </div>
+      </div>
+
+      {/* 3. Stats Grid (Reservations & Coupons) */}
+      <div className="grid grid-cols-2 gap-3 px-4 mb-8">
+         <div className="bg-gray-50 rounded-xl p-5 flex flex-col items-center justify-center gap-2 active:bg-gray-100 transition-colors cursor-pointer hover:bg-gray-100/80">
+            <div className="bg-white p-2 rounded-full shadow-sm">
+                <Calendar size={20} className="text-gray-700" />
+            </div>
+            <span className="text-xs text-gray-500 font-medium">Reservations</span>
+            <span className="text-xl font-bold text-gray-900">{stats.total_reservations}</span>
+         </div>
+         <div className="bg-gray-50 rounded-xl p-5 flex flex-col items-center justify-center gap-2 active:bg-gray-100 transition-colors cursor-pointer hover:bg-gray-100/80">
+            <div className="bg-white p-2 rounded-full shadow-sm">
+                <Ticket size={20} className="text-gray-700" />
+            </div>
+            <span className="text-xs text-gray-500 font-medium">Coupons</span>
+            <span className="text-xl font-bold text-gray-900">{stats.available_coupons_count}</span>
+         </div>
+      </div>
+
+      {/* 4. Menu List */}
+      <div className="px-4">
+         <MenuLink icon={Calendar} label="My Reservations" />
+         <MenuLink icon={Map} label="My Trips" />
+         <MenuLink icon={ShoppingBag} label="My Points" />
+         <MenuLink icon={FileText} label="Medical History" />
+         <MenuLink icon={Star} label="My Reviews" />
+         <MenuLink icon={Users} label="Invite Friends" />
+         
+         <div className="mt-8 flex flex-col items-center gap-4 py-4">
+             <div className="flex items-center gap-2 text-gray-400 text-sm font-medium hover:text-gray-600 cursor-pointer">
+                 <LogOut size={16} /> Log Out
+             </div>
+             <span className="text-xs text-gray-300">v1.0.0</span>
+         </div>
+      </div>
+    </div>
+  );
+};
+
+
+
 // --- Documentation Content ---
 
+const CopyableCredential = ({ label, value }: { label: string; value: string }) => {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(value);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  return (
+    <div className="flex items-center justify-between bg-white p-3 rounded-md border border-slate-200 shadow-sm group hover:border-brand-blue/50 transition-colors">
+      <div className="flex flex-col overflow-hidden mr-4">
+        <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-0.5">{label}</span>
+        <span className="text-sm font-mono text-slate-800 truncate select-all">{value}</span>
+      </div>
+      <button 
+        onClick={handleCopy}
+        className="flex-shrink-0 p-2 text-slate-400 hover:text-brand-blue hover:bg-brand-lightblue/10 rounded-lg transition-all"
+        title="Copy to clipboard"
+        aria-label={`Copy ${label}`}
+      >
+        {copied ? <CheckCircle className="w-4 h-4 text-green-500" /> : <Copy className="w-4 h-4" />}
+      </button>
+    </div>
+  );
+};
+
+
+
 const DOCS_DATA: DocCategory[] = [
+  {
+    id: 'test-account',
+    title: '테스트 계정 및 마이페이지',
+    icon: User,
+    sections: [
+      {
+        id: 'test-account-login',
+        title: '1. 테스트 계정 생성 및 로그인',
+        content: (
+          <>
+            <p className="text-slate-600 mb-6 text-lg leading-relaxed">
+              K-Beauty Pass 플랫폼은 개발 및 테스트 편의를 위해 별도의 회원가입 절차 없는
+              <strong className="text-slate-900"> '테스트 계정 원클릭 생성' </strong> 기능을 지원합니다.
+              로그인 후 마이페이지에서 제공되는 다양한 기능을 경험해보세요.
+            </p>
+            
+            <GuideVideo src="/test_account_login.mp4" caption="테스트 계정 생성 및 로그인 프로세스" />
+
+            <div className="mt-8 bg-brand-lightblue/5 border border-brand-lightblue/20 rounded-xl p-6">
+              <h4 className="font-bold text-brand-blue mb-4 flex items-center gap-2">
+                <Zap className="w-5 h-5 fill-current" /> 
+                테스트 계정 발급 (Test Account Access)
+              </h4>
+              <p className="text-sm text-slate-600 mb-4">
+                로그인 화면 하단의 전용 패널을 통해 즉시 접속이 가능합니다. 
+                <span className="bg-yellow-100 text-yellow-800 px-1 rounded ml-1 font-bold">실제 이메일 인증이나 비밀번호 입력이 필요하지 않습니다.</span>
+              </p>
+              
+              <div className="bg-white rounded-lg border border-brand-lightblue/30 p-4 space-y-3 shadow-sm">
+                <div className="flex">
+                  <span className="w-24 text-xs font-bold text-slate-400 uppercase tracking-wide flex-shrink-0 pt-1">Action</span>
+                  <span className="text-sm text-slate-800 font-medium">로그인 페이지 {'>'} 하단 <span className="text-brand-blue font-bold">[테스트 사용자 생성]</span> 버튼 클릭</span>
+                </div>
+                <div className="flex">
+                  <span className="w-24 text-xs font-bold text-slate-400 uppercase tracking-wide flex-shrink-0 pt-1">Account Type</span>
+                  <span className="text-sm text-slate-800">일반 사용자 (User) 권한으로 자동 생성</span>
+                </div>
+                <div className="flex">
+                  <span className="w-24 text-xs font-bold text-slate-400 uppercase tracking-wide flex-shrink-0 pt-1">Note</span>
+                  <span className="text-sm text-slate-500">병원 관리자 계정 생성 기능은 현재 준비 중입니다.</span>
+                </div>
+              </div>
+            </div>
+          </>
+        )
+      },
+      {
+        id: 'mypage-dashboard',
+        title: '2. 마이페이지 (My Page) 통합 대시보드',
+        content: (
+          <>
+            <p className="text-slate-600 mb-8">
+              환자의 의료 여정을 통합 관리할 수 있는 개인화된 대시보드입니다. 
+              예약 상태부터 시술 이력, 포인트 및 혜택까지 한눈에 확인하세요.
+            </p>
+
+            <div className="flex flex-col md:flex-row gap-8 items-start">
+              <div className='flex-shrink-0 w-full md:w-auto'>
+                <div className="text-xs text-center text-slate-400 mb-2 font-bold">Dashboard Preview</div>
+                <MockMyPage />
+              </div>
+              <div className="flex-1 space-y-8 pt-4">
+                <div>
+                   <h5 className="font-bold text-slate-900 mb-2 flex items-center gap-2">
+                     <span className="w-6 h-6 rounded bg-brand-lightblue/20 text-brand-blue flex items-center justify-center text-xs">1</span>
+                     대시보드 현황 (Stats Grid)
+                   </h5>
+                   <ul className="list-disc pl-9 text-sm text-slate-600 space-y-1">
+                     <li><strong>Reservations:</strong> 진행 중인 예약 건수를 실시간으로 확인합니다.</li>
+                     <li><strong>Coupons:</strong> 사용 가능한 보유 쿠폰 수량을 표시합니다.</li>
+                   </ul>
+                </div>
+                <div>
+                   <h5 className="font-bold text-slate-900 mb-2 flex items-center gap-2">
+                     <span className="w-6 h-6 rounded bg-brand-lightblue/20 text-brand-blue flex items-center justify-center text-xs">2</span>
+                     의료 여정 관리 (Journey)
+                   </h5>
+                   <ul className="list-disc pl-9 text-sm text-slate-600 space-y-1">
+                     <li><strong>My Reservations:</strong> 상세 예약 일정 및 확정 상태를 확인합니다.</li>
+                     <li><strong>Medical History:</strong> 과거 시술 내역 및 상담 기록을 아카이빙합니다.</li>
+                     <li><strong>My Trips:</strong> 한국 방문 및 의료 관광 일정을 관리합니다.</li>
+                   </ul>
+                </div>
+                <div>
+                   <h5 className="font-bold text-slate-900 mb-2 flex items-center gap-2">
+                     <span className="w-6 h-6 rounded bg-brand-lightblue/20 text-brand-blue flex items-center justify-center text-xs">3</span>
+                     혜택 및 활동 (Rewards)
+                   </h5>
+                   <ul className="list-disc pl-9 text-sm text-slate-600 space-y-1">
+                     <li><strong>My Points:</strong> 적립된 포인트 조회 및 사용 내역을 확인합니다.</li>
+                     <li><strong>My Reviews:</strong> 병원 방문 후 작성한 리뷰를 관리합니다.</li>
+                   </ul>
+                </div>
+              </div>
+            </div>
+          </>
+        )
+      }
+    ]
+  },
   {
     id: 'reservation',
     title: '플랫폼 예약 (Platform)',
@@ -185,6 +405,21 @@ const DOCS_DATA: DocCategory[] = [
               환자가 10%의 보증금을 결제해야만 병원 캘린더에 예약이 확정됩니다. 아래 영상에서 일반적인 예약 과정을 확인해보세요.
             </p>
             <GuideVideo src="/reservation.mp4" caption="일반 고객 예약 프로세스 시연" />
+
+            <div className="mt-8 bg-slate-50 border border-slate-200 rounded-xl p-6">
+              <h4 className="font-bold text-slate-800 mb-3 flex items-center gap-2 text-sm">
+                <CreditCard className="w-4 h-4 text-brand-blue" /> 
+                PayPal Sandbox 결제 테스트 정보
+              </h4>
+              <p className="text-sm text-slate-600 mb-4 leading-relaxed">
+                현재 개발 환경에서는 <strong>PayPal Sandbox</strong>를 통해 결제가 이루어집니다. 
+                실제 비용이 청구되지 않으며, 예약 플로우를 테스트하시려면 아래의 테스트 전용 계정을 사용해주세요.
+              </p>
+              <div className="flex flex-col gap-3">
+                <CopyableCredential label="테스트 계정 ID (Email)" value="sb-q1x1p47636718@personal.example.com" />
+                <CopyableCredential label="테스트 계정 Password" value="98d7<cE6" />
+              </div>
+            </div>
           </>
         )
       },
@@ -228,6 +463,98 @@ const DOCS_DATA: DocCategory[] = [
                   <div className="bg-brand-blue text-white p-3 rounded-lg rounded-tr-none text-sm shadow-sm self-end text-right">
                     <div className="text-xs text-blue-200 mb-1">Hospital (Original)</div>
                     개인차는 있지만 보통 3~5일 정도면 큰 붓기는 가라앉습니다.
+                  </div>
+               </div>
+            </div>
+          </>
+        )
+      }
+    ]
+  },
+  {
+    id: 'direct-chat',
+    title: '스마트 컨텍스트 상담 (Smart Chat)',
+    icon: MessageSquare,
+    sections: [
+      {
+        id: 'direct-chat-overview',
+        title: '스마트 컨텍스트 상담 (Smart Chat)',
+        content: (
+          <>
+            <p className="text-slate-600 mb-6 text-lg">
+              단순한 메신저가 아닙니다. 예약 전 문의부터 시술 후 케어까지, 
+              <strong> 환자의 시술 관심사와 예약 내역이 연동되는 스마트 채팅</strong>입니다.
+              환자가 보고 들어온 시술 정보가 상담창에 즉시 공유되어, 불필요한 설명 없이 핵심적인 상담이 가능합니다.
+            </p>
+            <GuideVideo src="/chat_support.mp4" caption="관심 시술 기반으로 즉시 상담을 시작하는 모습" />
+
+            {/* Info Box: Smart Context Sync */}
+            <div className="bg-brand-lightblue/5 border border-brand-lightblue/20 rounded-xl p-6 mb-8">
+              <h4 className="font-bold text-brand-blue mb-4 flex items-center gap-2">
+                <Zap className="w-5 h-5 fill-current" /> 
+                컨텍스트 자동 동기화 (Context Sync)
+              </h4>
+              <p className="text-sm text-slate-600 mb-4">
+                "저 이거 얼마예요?"라고 물어도 당황하지 마세요. 채팅방 생성과 동시에 
+                <strong> 환자의 관심 시술, 보고 있는 페이지, 기존 예약 이력</strong>이 
+                관리자 화면 사이드바에 자동으로 요약되어 표시됩니다.
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                 <div className="bg-white p-3 rounded-lg border border-brand-lightblue/30 text-sm shadow-sm text-center">
+                    <div className="font-bold text-slate-800 mb-1">Context Aware</div>
+                    <div className="text-xs text-slate-500">관심 시술 및 예약 내역 자동 연동</div>
+                 </div>
+                 <div className="bg-white p-3 rounded-lg border border-brand-lightblue/30 text-sm shadow-sm text-center">
+                    <div className="font-bold text-slate-800 mb-1">Smart Handover</div>
+                    <div className="text-xs text-slate-500">AI 초동 응대 후 담당자 연결 지원</div>
+                 </div>
+                 <div className="bg-white p-3 rounded-lg border border-brand-lightblue/30 text-sm shadow-sm text-center">
+                    <div className="font-bold text-slate-800 mb-1">Secure Channel</div>
+                    <div className="text-xs text-slate-500">의료 데이터 암호화 및 보안 전송</div>
+                 </div>
+              </div>
+            </div>
+
+            {/* Feature Details */}
+            <h3 className="text-xl font-bold text-slate-800 mb-4">전환율을 높이는 상담 도구</h3>
+            <p className="text-slate-600 mb-8">
+               텍스트로 설명하기 힘든 시술 정보와 가격, 상담원이 직접 제안하는 혜택을 전용 UI 카드로 전달하여 예약을 유도하세요.
+            </p>
+
+            <div className="flex flex-col lg:flex-row gap-8 items-start">
+               <div className='flex-shrink-0 w-full lg:w-auto'>
+                  <div className="text-xs text-center text-slate-400 mb-2 font-bold">Chat Room Preview</div>
+                  <MockHospitalChatRoom />
+               </div>
+               <div className="flex-1 space-y-6 pt-4">
+                  <div className="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                     <h5 className="font-bold text-slate-900 mb-2 flex items-center gap-2 text-sm">
+                       <CreditCard className="w-4 h-4 text-brand-blue" />
+                       스마트 제안 카드 (Recommendation Cards)
+                     </h5>
+                     <p className="text-sm text-slate-600 mb-2">
+                       상담 중 환자에게 적합한 시술을 <strong>정보 카드 형태</strong>로 제안해보세요. 
+                       환자는 채팅방을 나가지 않고도 가격과 상세 정보를 확인하고, 
+                       <strong> '예약하기' 버튼 한 번으로 즉시 예약을 확정</strong>할 수 있습니다.
+                     </p>
+                     <ul className="list-disc pl-5 text-xs text-slate-500 space-y-1">
+                        <li>실시간 가격 및 할인 혜택이 적용된 카드 전송</li>
+                        <li>채팅방 내에서 즉시 장바구니 담기 및 결제 지원</li>
+                     </ul>
+                  </div>
+
+                  <div className="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                     <h5 className="font-bold text-slate-900 mb-2 flex items-center gap-2 text-sm">
+                       <User className="w-4 h-4 text-brand-blue" />
+                       신뢰도 높은 담당자 프로필
+                     </h5>
+                     <p className="text-sm text-slate-600">
+                       익명의 상담원이 아닌, 병원의 전문 담당자 프로필이 노출됩니다. 
+                       응답 대기 중에는 AI가 기본 응대를 지원하고, 담당자 연결 시 예상 대기 시간을 안내하여 이탈을 방지합니다.
+                       <br/>
+                       <span className="text-xs bg-purple-100 text-purple-700 px-1.5 rounded ml-1">K-Beautypass AI</span>
+                       <span className="text-xs bg-slate-200 text-slate-600 px-1.5 rounded ml-1">Hospital Staff</span>
+                     </p>
                   </div>
                </div>
             </div>
@@ -414,9 +741,18 @@ const DocsPage: React.FC = () => {
 
             <div className="mt-8 px-4 py-4 bg-slate-50 rounded-xl border border-slate-100 hidden lg:block">
               <p className="text-xs text-slate-500 mb-2">기술 지원이 필요하신가요?</p>
-              <button className="text-xs font-bold text-brand-blue hover:underline flex items-center gap-1">
+              <button className="text-xs font-bold text-brand-blue hover:underline flex items-center gap-1 mb-4">
                 <HelpCircle className="w-3 h-3" /> 고객센터 연결
               </button>
+              
+              <a 
+                href="https://vitalconnect.k-beautypass.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="block w-full text-center bg-brand-dark text-white text-xs font-bold py-2.5 rounded-lg hover:bg-slate-700 transition-colors shadow-md shadow-slate-200"
+              >
+                VitalConnect 바로가기
+              </a>
             </div>
           </aside>
 
