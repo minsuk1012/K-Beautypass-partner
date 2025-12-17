@@ -493,93 +493,52 @@ const CopyableCredential = ({ label, value }: { label: string; value: string }) 
 
 const DOCS_DATA: DocCategory[] = [
   {
-    id: 'partnership',
-    title: '입점 신청',
-    icon: Building2,
-    sections: [
-      {
-        id: 'how-to-apply',
-        title: '1. 병원 입점 신청 절차',
-        content: (
-          <>
-            <p className="text-slate-600 mb-6 text-lg">
-              K-Beauty Pass의 병원 입점 절차를 안내해 드립니다.
-            </p>
-            
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-12">
-               {[
-                 { step: 1, title: '회원가입', desc: '파트너 계정을 생성합니다.' },
-                 { step: 2, title: '병원 정보 입력', desc: '병원 기본 정보와 담당자 정보를 입력합니다.' },
-                 { step: 3, title: '시술/가격 설정', desc: '대표 시술 상품을 등록합니다.' },
-                 { step: 4, title: '심사 및 승인', desc: '운영팀 검토 후 최종 입점됩니다.' }
-               ].map((s) => (
-                 <div key={s.step} className="bg-slate-50 border border-slate-200 rounded-xl p-4 relative overflow-hidden group hover:border-brand-blue/30 transition-colors">
-                    <div className="absolute top-0 right-0 p-2 opacity-10 font-black text-4xl text-slate-900 group-hover:text-brand-blue transition-colors">{s.step}</div>
-                    <div className="font-bold text-slate-900 mb-1">{s.title}</div>
-                    <div className="text-xs text-slate-500">{s.desc}</div>
-                 </div>
-               ))}
-            </div>
-
-            <h3 className="text-xl font-bold text-slate-900 mb-4">데이터 입력 및 앱 노출 예시</h3>
-            <p className="text-slate-600 mb-4 text-sm">
-                파트너 센터에서 입력하신 <strong>상품명</strong>과 <strong>가격 옵션</strong>이 실제 앱 사용자에게 어떻게 보여지는지 확인하세요.
-            </p>
-            
-            <MockAppPreview />
-            
-             <div className="mt-12 text-center border-t border-slate-100 pt-8">
-                <a href="/partner/onboarding" className="inline-flex items-center gap-2 bg-slate-900 text-white px-8 py-4 rounded-xl font-bold hover:bg-slate-800 transition-all shadow-xl shadow-slate-900/10 hover:shadow-slate-900/20 transform hover:-translate-y-1">
-                   입점 신청 시작하기 <ChevronRight className="w-5 h-5" />
-                </a>
-             </div>
-          </>
-        )
-      }
-    ]
-  },
-  {
     id: 'test-account',
-    title: '테스트 계정 및 마이페이지',
+    title: '체험하기',
     icon: User,
     sections: [
       {
-        id: 'test-account-login',
-        title: '1. 테스트 계정 생성 및 로그인',
+        id: 'visit-page',
+        title: '1. 페이지 방문하기',
         content: (
           <>
             <p className="text-slate-600 mb-6 text-lg leading-relaxed">
-              K-Beauty Pass 플랫폼은 개발 및 테스트 편의를 위해 별도의 회원가입 절차 없는
-              <strong className="text-slate-900"> '테스트 계정 원클릭 생성' </strong> 기능을 지원합니다.
-              로그인 후 마이페이지에서 제공되는 다양한 기능을 경험해보세요.
+              K-Beauty Pass 데모 페이지를 방문하여 실제 사용자 경험을 확인해보세요.
+              <br/>
+              별도의 설치 없이 웹 환경에서 바로 접속하실 수 있습니다.
             </p>
             
-            <GuideVideo src="/login.mp4" caption="테스트 계정 생성 및 로그인 프로세스" />
+            <div className="mt-8 mb-12 text-center">
+                 <a 
+                    href="https://test.k-beautypass.com" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 bg-brand-blue text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-blue-600 transition-all shadow-xl shadow-brand-blue/20 transform hover:-translate-y-1 block w-full md:w-auto mx-auto justify-center"
+                 >
+                    <Globe className="w-5 h-5" /> 데모 페이지 바로가기 (test.k-beautypass.com)
+                 </a>
+            </div>
 
             <div className="mt-8 bg-brand-lightblue/5 border border-brand-lightblue/20 rounded-xl p-6">
               <h4 className="font-bold text-brand-blue mb-4 flex items-center gap-2">
                 <Zap className="w-5 h-5 fill-current" /> 
-                테스트 계정 발급
+                테스트 계정 자동 로그인
               </h4>
               <p className="text-sm text-slate-600 mb-4">
-                로그인 화면 하단의 전용 패널을 통해 즉시 접속이 가능합니다. 
-                <span className="bg-yellow-100 text-yellow-800 px-1 rounded ml-1 font-bold">실제 이메일 인증이나 비밀번호 입력이 필요하지 않습니다.</span>
+                접속 시 로그인 화면 하단의 <strong>[테스트 사용자 생성]</strong> 버튼을 클릭하면
+                즉시 테스트 계정으로 로그인되어 모든 기능을 경험하실 수 있습니다.
               </p>
               
               <div className="bg-white rounded-lg border border-brand-lightblue/30 p-4 space-y-3 shadow-sm">
                 <div className="flex">
-                  <span className="w-24 text-xs font-bold text-slate-400 uppercase tracking-wide flex-shrink-0 pt-1">실행</span>
+                  <span className="w-24 text-xs font-bold text-slate-400 uppercase tracking-wide flex-shrink-0 pt-1">사용 방법</span>
                   <span className="text-sm text-slate-800 font-medium">로그인 페이지 {'>'} 하단 <span className="text-brand-blue font-bold">[테스트 사용자 생성]</span> 버튼 클릭</span>
                 </div>
-                <div className="flex">
-                  <span className="w-24 text-xs font-bold text-slate-400 uppercase tracking-wide flex-shrink-0 pt-1">계정 유형</span>
-                  <span className="text-sm text-slate-800">일반 사용자 권한으로 자동 생성</span>
-                </div>
-                <div className="flex">
-                  <span className="w-24 text-xs font-bold text-slate-400 uppercase tracking-wide flex-shrink-0 pt-1">비고</span>
-                  <span className="text-sm text-slate-500">병원 관리자 계정 생성 기능은 현재 준비 중입니다.</span>
-                </div>
               </div>
+            </div>
+            
+            <div className="mt-8">
+                <GuideVideo src="/login.mp4" caption="테스트 계정 생성 및 로그인 프로세스" />
             </div>
           </>
         )
@@ -969,13 +928,61 @@ const DOCS_DATA: DocCategory[] = [
         )
       }
     ]
+  },
+  {
+    id: 'partnership',
+    title: '입점 방법',
+    icon: Building2,
+    sections: [
+      {
+        id: 'how-to-apply',
+        title: '1. 병원 입점 신청 절차',
+        content: (
+          <>
+            <div className="mb-8">
+                <a href="/partner/onboarding" className="inline-flex items-center gap-2 bg-slate-900 text-white px-6 py-3 rounded-xl font-bold hover:bg-slate-800 transition-all shadow-lg">
+                   입점신청 시작하기 <ChevronRight className="w-4 h-4" />
+                </a>
+            </div>
+
+            <p className="text-slate-600 mb-6 text-lg">
+              K-Beauty Pass의 병원 입점 절차를 안내해 드립니다.
+            </p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-12">
+               {[
+                 { step: 1, title: '회원가입', desc: '파트너 계정을 생성합니다.' },
+                 { step: 2, title: '병원 정보 입력', desc: '병원 기본 정보와 담당자 정보를 입력합니다.' },
+                 { step: 3, title: '시술/가격 설정', desc: '대표 시술 상품을 등록합니다.' },
+                 { step: 4, title: '심사 및 승인', desc: '운영팀 검토 후 최종 입점됩니다.' }
+               ].map((s) => (
+                 <div key={s.step} className="bg-slate-50 border border-slate-200 rounded-xl p-4 relative overflow-hidden group hover:border-brand-blue/30 transition-colors">
+                    <div className="absolute top-0 right-0 p-2 opacity-10 font-black text-4xl text-slate-900 group-hover:text-brand-blue transition-colors">{s.step}</div>
+                    <div className="font-bold text-slate-900 mb-1">{s.title}</div>
+                    <div className="text-xs text-slate-500">{s.desc}</div>
+                 </div>
+               ))}
+            </div>
+
+            <h3 className="text-xl font-bold text-slate-900 mb-4">데이터 입력 및 앱 노출 예시</h3>
+            <p className="text-slate-600 mb-4 text-sm">
+                파트너 센터에서 입력하신 <strong>상품명</strong>과 <strong>가격 옵션</strong>이 실제 앱 사용자에게 어떻게 보여지는지 확인하세요.
+            </p>
+            
+            <MockAppPreview />
+            
+
+          </>
+        )
+      }
+    ]
   }
 ];
 
 // --- Main Component ---
 
 const DocsPage: React.FC = () => {
-  const [activeDocId, setActiveDocId] = useState<DocId>('partnership');
+  const [activeDocId, setActiveDocId] = useState<DocId>('test-account');
   const activeDoc = DOCS_DATA.find(d => d.id === activeDocId) || DOCS_DATA[0];
 
   const scrollToSection = (sectionId: string) => {
@@ -1028,18 +1035,9 @@ const DocsPage: React.FC = () => {
 
             <div className="mt-8 px-4 py-4 bg-slate-50 rounded-xl border border-slate-100 hidden lg:block">
               <p className="text-xs text-slate-500 mb-2">기술 지원이 필요하신가요?</p>
-              <button className="text-xs font-bold text-brand-blue hover:underline flex items-center gap-1 mb-4">
-                <HelpCircle className="w-3 h-3" /> 고객센터 연결
-              </button>
-              
-              <a 
-                href="https://vitalconnect.k-beautypass.com" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="block w-full text-center bg-brand-dark text-white text-xs font-bold py-2.5 rounded-lg hover:bg-slate-700 transition-colors shadow-md shadow-slate-200"
-              >
-                VitalConnect 바로가기
-              </a>
+              <div className="text-sm font-bold text-slate-900 flex items-center gap-1">
+                 010-4114-2106
+              </div>
             </div>
           </aside>
 

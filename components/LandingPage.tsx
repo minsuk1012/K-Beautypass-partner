@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { 
   Globe, Zap, ShieldCheck, Stethoscope, 
   Calendar, CheckCircle, 
-  TrendingUp, ArrowRight, FileText, MessageSquare
+  TrendingUp, ArrowRight, FileText, MessageSquare, User
 } from 'lucide-react';
 import Link from 'next/link';
 
@@ -64,42 +64,87 @@ export const LandingPage = () => {
             {/* Gradient Blob based on brand colors */}
             <div className="absolute inset-0 bg-gradient-to-tr from-brand-lightblue to-brand-pink rounded-[40px] rotate-3 blur-3xl opacity-60" />
             
-            <div className="relative w-full h-[400px] md:h-[500px] bg-white rounded-3xl shadow-2xl border border-slate-100 overflow-hidden p-6 flex flex-col">
-              {/* Mock UI */}
-              <div className="w-full h-8 flex items-center gap-2 mb-4 border-b border-slate-100 pb-2">
-                <div className="w-3 h-3 rounded-full bg-brand-pink" />
-                <div className="w-3 h-3 rounded-full bg-brand-lightblue" />
-                <div className="w-3 h-3 rounded-full bg-brand-blue/20" />
-              </div>
-              <div className="flex-1 grid grid-cols-12 gap-4">
-                  <div className="col-span-4 bg-slate-50 rounded-xl p-4 flex flex-col gap-3">
-                    <div className="w-full h-8 bg-white rounded-lg shadow-sm" />
-                    <div className="w-2/3 h-4 bg-slate-200 rounded animate-pulse" />
-                    <div className="w-full h-24 bg-white rounded-lg border border-brand-lightblue p-2 mt-4 relative overflow-hidden">
-                        <div className="absolute top-0 left-0 bg-brand-blue text-white text-[10px] px-2 py-0.5 rounded-br">신규 예약 요청</div>
-                        <div className="mt-4 w-3/4 h-3 bg-slate-100 rounded" />
-                        <div className="mt-2 w-1/2 h-3 bg-slate-100 rounded" />
-                    </div>
-                  </div>
-                  <div className="col-span-8 bg-slate-50 rounded-xl p-6 relative">
-                    <div className="absolute top-6 right-6 flex gap-2">
-                        <span className="bg-brand-blue/10 text-brand-blue px-2 py-1 rounded text-xs font-bold">결제 완료</span>
-                    </div>
-                    <h3 className="text-lg font-bold text-slate-800 mb-1">사라 젠킨스</h3>
-                    <p className="text-xs text-slate-500 mb-6">미국 (English) • 방문예정: 2025. 05. 20</p>
-                    
-                    <div className="bg-white p-4 rounded-xl shadow-sm border border-slate-100 mb-4">
-                        <div className="flex items-center gap-2 mb-2 text-brand-red font-bold text-sm">
-                          <Zap className="w-4 h-4" /> AI 의료 요약 (번역본)
+            <div className="relative w-full h-auto min-h-[450px] bg-white rounded-3xl shadow-2xl border border-slate-100 overflow-hidden flex flex-col font-sans">
+                {/* Header */}
+                <div className="bg-white border-b border-slate-100 p-6 flex items-center justify-between">
+                  <div className="flex items-center gap-4">
+                     <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center">
+                        <User className="w-6 h-6" />
+                     </div>
+                     <div>
+                        <div className="font-heading font-bold text-slate-900 text-lg md:text-xl">Sarah Jenkins</div>
+                        <div className="text-xs text-slate-500 font-medium flex items-center gap-2">
+                           🇺🇸 USA <span className="text-slate-300">|</span> 2025. 05. 20 Visits
                         </div>
-                        <p className="text-sm text-slate-600 leading-relaxed">
-                          환자는 눈밑 지방 재배치와 가벼운 리프팅 시술을 원하고 있습니다. 
-                          아스피린 알레르기가 있으며, 체류 기간은 5일입니다.
-                        </p>
-                    </div>
-                    <button className="w-full bg-brand-dark text-white py-3 rounded-lg text-sm font-bold mt-auto">예약 확정하기</button>
+                     </div>
                   </div>
-              </div>
+                  <div className="bg-green-50 text-green-700 px-3 py-1 rounded-full text-xs font-bold border border-green-100">
+                      Booking Confirmed
+                  </div>
+                </div>
+
+                {/* Body */}
+                <div className="flex-1 flex flex-col md:flex-row divide-y md:divide-y-0 md:divide-x divide-slate-100 bg-slate-50/30">
+                   
+                   {/* Travel Info */}
+                   <div className="flex-1 p-6 space-y-6">
+                      <div className="flex items-center gap-2 mb-2">
+                         <Globe className="w-4 h-4 text-brand-blue" />
+                         <h4 className="font-bold text-slate-800 text-sm uppercase tracking-wide">Travel Details</h4>
+                      </div>
+
+                      <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm relative overflow-hidden group hover:shadow-md transition-shadow">
+                         <div className="flex items-center justify-between mb-2">
+                             <div className="text-[10px] text-slate-400 font-bold uppercase">Estimated Budget</div>
+                             <div className="text-brand-blue text-xs font-bold">$2k - $5k</div>
+                         </div>
+                         <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
+                            <div className="h-full w-2/3 bg-brand-blue rounded-full"></div>
+                         </div>
+                      </div>
+
+                      <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex items-center gap-3">
+                         <div className="bg-brand-pink/10 p-2 rounded-lg text-brand-pink">
+                            <Calendar className="w-5 h-5" />
+                         </div>
+                         <div>
+                            <div className="text-[10px] text-slate-400 font-bold uppercase">Stay Duration</div>
+                            <div className="text-slate-900 font-bold">7 Days</div>
+                         </div>
+                      </div>
+                   </div>
+
+                   {/* Medical Info */}
+                   <div className="flex-1 p-6 space-y-6">
+                      <div className="flex items-center gap-2 mb-2">
+                         <Stethoscope className="w-4 h-4 text-brand-red" />
+                         <h4 className="font-bold text-slate-800 text-sm uppercase tracking-wide">Medical Info</h4>
+                      </div>
+
+                      <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm space-y-3">
+                         <div className="flex items-start gap-3">
+                             <div className="w-6 h-6 rounded-full bg-red-50 text-red-500 border border-red-100 flex items-center justify-center font-bold text-xs shrink-0">!</div>
+                             <div>
+                                <div className="text-xs text-slate-400 font-bold uppercase">Allergies</div>
+                                <div className="font-bold text-slate-900">Aspirin</div>
+                             </div>
+                         </div>
+                         <div className="w-full h-px bg-slate-100" />
+                         <div className="flex items-start gap-3">
+                             <div className="w-6 h-6 rounded-full bg-purple-50 text-purple-500 border border-purple-100 flex items-center justify-center font-bold text-xs shrink-0">Rx</div>
+                             <div>
+                                <div className="text-xs text-slate-400 font-bold uppercase">History</div>
+                                <div className="font-bold text-slate-900">Botox (6mo ago)</div>
+                             </div>
+                         </div>
+                      </div>
+                      
+                      <div className="bg-brand-blue/5 border border-brand-blue/10 p-3 rounded-lg flex items-center gap-2">
+                         <Zap className="w-4 h-4 text-brand-blue fill-current" />
+                         <span className="text-xs text-brand-blue font-bold">AI Translated Report Included</span>
+                      </div>
+                   </div>
+                </div>
             </div>
             
             {/* Floating Badges */}
@@ -308,7 +353,7 @@ export const LandingPage = () => {
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
               <h2 className="text-3xl md:text-5xl font-heading font-bold text-slate-900 mb-6">
-                복잡한 설치 없이 <br/> 웹에서 바로 관리하세요
+                국경 없는 의료 서비스, <br/> <span className="text-brand-blue">글로벌 환자 유치</span>로 매출을 극대화하세요
               </h2>
           </div>
 
@@ -330,18 +375,50 @@ export const LandingPage = () => {
               </div>
 
               <div className="bg-white p-8 rounded-3xl shadow-lg border border-slate-100 flex flex-col">
-                <div className="h-40 bg-brand-pink/30 rounded-xl mb-6 flex items-center justify-center overflow-hidden relative">
-                    <div className="absolute inset-4 bg-white rounded-lg shadow-sm grid grid-cols-7 gap-1 p-2">
-                      {[...Array(14)].map((_,i) => <div key={i} className={`rounded-sm ${i === 4 ? 'bg-brand-red' : 'bg-slate-100'}`} />)}
+                <div className="h-40 bg-brand-pink/10 rounded-xl mb-6 flex flex-col items-center justify-center relative px-6">
+                    <div className="w-full space-y-3">
+                       <div className="flex items-center gap-2 text-xs text-slate-600 font-bold">
+                          <span className="w-12">Existing</span>
+                          <div className="flex-1 h-3 bg-slate-200 rounded-full"></div>
+                          <span>30m</span>
+                       </div>
+                       <div className="flex items-center gap-2 text-sm text-rose-600 font-bold">
+                          <span className="w-12">KBP</span>
+                          <div className="w-1/4 h-3 bg-rose-500 rounded-full relative">
+                             <div className="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 bg-white rounded-full animate-ping" />
+                          </div>
+                          <span>5m</span>
+                       </div>
                     </div>
                 </div>
-                <h3 className="text-xl font-bold mb-3">간편한 스케줄링</h3>
-                <p className="text-slate-600 text-sm">드래그 앤 드롭으로 예약을 확정하고 변경하세요. 기존 병원 차트와 연동도 지원합니다.</p>
+                <h3 className="text-xl font-bold mb-3">문진 시간 단축</h3>
+                <p className="text-slate-600 text-sm">사전 AI 리포트로 환자 파악 시간을 획기적으로 줄입니다. 불필요한 질의응답 없이 곧바로 핵심 상담을 시작하세요.</p>
               </div>
 
               <div className="bg-white p-8 rounded-3xl shadow-lg border border-slate-100 flex flex-col">
-                <div className="h-40 bg-green-50 rounded-xl mb-6 flex items-center justify-center overflow-hidden relative">
-                    <div className="text-2xl font-black text-green-600">$12,450</div>
+                <div className="h-40 bg-green-50 rounded-xl mb-6 flex flex-col justify-center p-4 relative overflow-hidden">
+                    <div className="w-full bg-white rounded-lg shadow-sm border border-green-100 p-3 space-y-2 relative z-10">
+                       <div className="flex justify-between items-center text-xs text-slate-400 border-b border-slate-100 pb-1 mb-1">
+                          <span>Recent Payouts</span>
+                          <span>Amount</span>
+                       </div>
+                       <div className="flex justify-between items-center text-sm font-bold text-slate-800">
+                          <div className="flex flex-col">
+                             <span>Ulthera 300</span>
+                             <span className="text-[10px] text-slate-400 font-normal">Oct 24 • Completed</span>
+                          </div>
+                          <span className="text-green-600">+$1,200</span>
+                       </div>
+                       <div className="flex justify-between items-center text-sm font-bold text-slate-800 opacity-50">
+                          <div className="flex flex-col">
+                             <span>Botox 50u</span>
+                             <span className="text-[10px] text-slate-400 font-normal">Oct 23 • Completed</span>
+                          </div>
+                          <span className="text-green-600">+$150</span>
+                       </div>
+                    </div>
+                    {/* Background decoration */}
+                    <div className="absolute -right-4 -bottom-4 w-24 h-24 bg-green-200 rounded-full opacity-20 blur-xl"></div>
                 </div>
                 <h3 className="text-xl font-bold mb-3">투명한 자동 정산</h3>
                 <p className="text-slate-600 text-sm">시술 완료 후 주기에 맞춰 시술비가 자동 정산됩니다. 매출 리포트를 한눈에 확인하세요.</p>

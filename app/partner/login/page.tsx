@@ -35,7 +35,7 @@ export default function PartnerLoginPage() {
         <div className="flex flex-col items-center mb-8">
           <BrandLogo className="w-12 h-12 mb-4" />
           <h1 className="text-2xl font-bold text-slate-900">파트너 로그인</h1>
-          <p className="text-slate-500 text-sm">Vital Connect 병원 입점 파트너</p>
+          <p className="text-slate-500 text-sm">로그인 시 회원가입</p>
         </div>
 
         <form action={handleSubmit} className="space-y-4">

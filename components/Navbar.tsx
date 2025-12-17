@@ -49,7 +49,7 @@ export const Navbar = ({ isLoggedIn }: Props) => {
             </span>
           </Link>
           
-          {/* Desktop Menu */}
+            {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
             {['Problems', 'Solutions', 'Features'].map((item) => (
               <button 
@@ -62,19 +62,13 @@ export const Navbar = ({ isLoggedIn }: Props) => {
               </button>
             ))}
             
-            <Link
-              href="/partner/onboarding"
-              className="text-sm font-semibold text-slate-600 hover:text-brand-blue transition-colors"
-            >
-              병원 입점 신청
-            </Link>
             <Link 
               href="https://vitalconnect.k-beautypass.com/"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-brand-blue transition-colors"
             >
-              바이탈케넉션
+              바이탈 커넥트
             </Link>
             
             <Link 
@@ -84,25 +78,31 @@ export const Navbar = ({ isLoggedIn }: Props) => {
               <FileText className="w-4 h-4" /> 가이드
             </Link>
 
+            <Link
+              href="/consultation"
+              className="hover:text-brand-blue transition-colors"
+            >
+              입점 상담 신청
+            </Link>
+
             {isLoggedIn ? (
                 <button 
                   onClick={async () => {
-                      // Simple logout by clearing cookie and reload - ideally should be a server action or client handler calling API
                       document.cookie = 'partner_user_id=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
                       window.location.href = '/';
                   }}
-                  className="bg-slate-100 text-slate-600 px-5 py-2.5 rounded-lg text-sm font-bold hover:bg-slate-200 transition-all"
+                  className="text-slate-500 hover:text-slate-800 transition-colors"
                 >
                   로그아웃
                 </button>
-            ) : (
-                <Link
-                  href="/partner/login"
-                  className="bg-brand-dark text-white px-5 py-2.5 rounded-lg text-sm font-bold hover:bg-slate-800 transition-all shadow-lg shadow-brand-dark/10"
-                >
-                  파트너 로그인
-                </Link>
-            )}
+            ) : null}
+
+             <Link
+              href="/partner/onboarding"
+              className="bg-brand-dark text-white px-5 py-2.5 rounded-lg text-sm font-bold hover:bg-slate-800 transition-all shadow-lg shadow-brand-dark/10"
+            >
+              바로 입점
+            </Link>
           </div>
 
           {/* Mobile Menu Toggle */}
@@ -143,14 +143,28 @@ export const Navbar = ({ isLoggedIn }: Props) => {
                 onClick={() => setMobileMenuOpen(false)}
                 className="text-left text-lg font-medium text-slate-800 py-2 border-b border-slate-100"
               >
-                바이탈케넉션
+                바이탈 커넥트
+              </Link>
+               <Link
+                href="/docs"
+                onClick={() => setMobileMenuOpen(false)}
+                className="text-left text-lg font-medium text-slate-800 py-2 border-b border-slate-100 flex items-center gap-2"
+              >
+                <FileText className="w-5 h-5" /> 가이드
               </Link>
               <Link
                 href="/consultation"
-                className="mt-4 bg-brand-blue text-white w-full py-4 rounded-xl font-bold flex items-center justify-center"
+                onClick={() => setMobileMenuOpen(false)}
+                className="text-left text-lg font-medium text-slate-800 py-2 border-b border-slate-100"
+              >
+                입점 상담 신청
+              </Link>
+              <Link
+                href="/partner/onboarding"
+                className="mt-4 bg-brand-blue text-white w-full py-4 rounded-xl font-bold flex items-center justify-center text-lg shadow-lg shadow-brand-blue/20"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                입점 신청하기
+                바로 입점
               </Link>
             </div>
           </motion.div>
