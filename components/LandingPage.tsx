@@ -456,8 +456,8 @@ export const LandingPage = () => {
              
              <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                 <div>
-                   <div className="inline-flex items-center gap-2 bg-brand-pink/10 text-brand-pink px-4 py-1.5 rounded-full text-sm font-bold mb-6 border border-brand-pink/20">
-                      <Zap className="w-4 h-4" /> 테스트 프로모션 지원
+                   <div className="inline-flex items-center gap-2 bg-brand-pink text-white px-4 py-1.5 rounded-full text-sm font-bold mb-6 shadow-lg shadow-brand-pink/30">
+                      <Zap className="w-4 h-4 fill-current" /> 테스트 프로모션 지원
                    </div>
                    <h3 className="text-2xl md:text-3xl font-bold text-slate-900 mb-6 leading-tight">
                       초기 환자 유입을 위한<br/>

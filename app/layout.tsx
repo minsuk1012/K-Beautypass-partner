@@ -6,9 +6,25 @@ import { Footer } from '@/components/Footer';
 import FluidBackground from '@/components/FluidBackground';
 export const metadata: Metadata = {
   title: 'K-Beauty Pass | Hospital Partners',
-  description: 'Partnership platform for K-Beauty Pass',
+  description: '글로벌 환자 유치, K-Beauty Pass와 함께하세요. 성공적인 병원 마케팅의 시작.',
   icons: {
     icon: '/favicon.svg',
+  },
+  openGraph: {
+    title: 'K-Beauty Pass | Hospital Partners',
+    description: '글로벌 환자 유치, K-Beauty Pass와 함께하세요. 입점비 0원, 마케팅 지원 혜택까지!',
+    url: 'https://partners.k-beautypass.com',
+    siteName: 'K-Beauty Pass Partners',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'K-Beauty Pass Partners',
+      },
+    ],
+    locale: 'ko_KR',
+    type: 'website',
   },
 };
 

@@ -76,6 +76,7 @@ export default function PartnerOnboardingForm({ categories, variations, initialP
     const [showLoginModal, setShowLoginModal] = useState(false);
     const [pendingAction, setPendingAction] = useState<'draft' | 'final' | null>(null);
     const [isLoginMode, setIsLoginMode] = useState(true);
+    const [authLoading, setAuthLoading] = useState(false);
     const router = useRouter();
 
     useEffect(() => {
@@ -341,18 +342,26 @@ export default function PartnerOnboardingForm({ categories, variations, initialP
     };
 
     const handleLoginSubmit = async (formData: FormData) => {
-        const action = isLoginMode ? login : register;
-        const result = await action(formData);
-        
-        if (result.success) {
-            setIsLoggedIn(true);
-            setShowLoginModal(false);
-            if (pendingAction) {
-                executeSave(pendingAction === 'final');
-                setPendingAction(null);
+        setAuthLoading(true);
+        try {
+            const action = isLoginMode ? login : register;
+            const result = await action(formData);
+            
+            if (result.success) {
+                setIsLoggedIn(true);
+                setShowLoginModal(false);
+                if (pendingAction) {
+                    executeSave(pendingAction === 'final');
+                    setPendingAction(null);
+                }
+            } else {
+                alert((result as any).error); 
             }
-        } else {
-            alert((result as any).error); 
+        } catch (e) {
+            console.error(e);
+            alert('오류가 발생했습니다.');
+        } finally {
+            setAuthLoading(false);
         }
     };
 
@@ -746,8 +755,19 @@ export default function PartnerOnboardingForm({ categories, variations, initialP
                                 <label className="block text-sm font-medium text-slate-700 mb-1">비밀번호</label>
                                 <input name="password" type="password" required className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-brand-blue/20 outline-none" placeholder="비밀번호 입력" />
                             </div>
-                            <button type="submit" className="w-full py-3 bg-brand-blue text-white font-bold rounded-lg hover:bg-blue-600 transition-colors">
-                                {isLoginMode ? '로그인 및 저장' : '회원가입 및 저장'}
+                            <button 
+                                type="submit" 
+                                disabled={authLoading}
+                                className="w-full py-3 bg-brand-blue text-white font-bold rounded-lg hover:bg-blue-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                            >
+                                {authLoading ? (
+                                    <>
+                                        <Loader2 className="w-5 h-5 animate-spin" />
+                                        처리 중...
+                                    </>
+                                ) : (
+                                    isLoginMode ? '로그인 및 저장' : '회원가입 및 저장'
+                                )}
                             </button> 
                         </form>
                     </div>
