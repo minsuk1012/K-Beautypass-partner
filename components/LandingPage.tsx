@@ -437,6 +437,132 @@ export const LandingPage = () => {
         </div>
       </section>
 
+      {/* MARKETING BENEFITS SECTION */}
+      <section id="marketing" className="py-20 md:py-32 bg-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-brand-lightblue/5" />
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <div className="text-center mb-16">
+            <span className="text-brand-blue font-bold tracking-widest uppercase text-sm mb-2 block">Partnership Benefits</span>
+            <h2 className="text-3xl md:text-5xl font-heading font-bold text-slate-900 mb-6">
+              B2B 제공 혜택 <span className="text-slate-400 font-light">(마케팅 연계)</span>
+            </h2>
+            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+              초기 입점 병원의 성공적인 안착을 위해 <br className="hidden md:block" />
+              실질적인 마케팅 지원 프로그램을 운영합니다.
+            </p>
+          </div>
+
+          <div className="bg-white rounded-3xl border border-slate-200 p-8 md:p-12 shadow-xl relative overflow-hidden">
+             
+             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div>
+                   <div className="inline-flex items-center gap-2 bg-brand-pink/10 text-brand-pink px-4 py-1.5 rounded-full text-sm font-bold mb-6 border border-brand-pink/20">
+                      <Zap className="w-4 h-4" /> 테스트 프로모션 지원
+                   </div>
+                   <h3 className="text-2xl md:text-3xl font-bold text-slate-900 mb-6 leading-tight">
+                      초기 환자 유입을 위한<br/>
+                      <span className="text-brand-blue">집중 마케팅 패키지</span>
+                   </h3>
+                   
+                   <div className="space-y-8">
+                      {/* Feature 1 */}
+                      <div className="flex gap-4 group">
+                         <div className="w-12 h-12 rounded-2xl bg-brand-blue/5 border border-brand-blue/10 flex items-center justify-center shrink-0 text-brand-blue font-bold text-xl group-hover:bg-brand-blue group-hover:text-white transition-colors">1</div>
+                         <div>
+                            <h4 className="font-bold text-slate-900 text-lg mb-2">입점 후 1개월 : 메인 배너 노출</h4>
+                            <p className="text-slate-600 text-sm leading-relaxed">
+                               가장 트래픽이 높은 앱 메인 페이지 상단에 파트너 병원의 <br/>단독 이벤트 배너를 1개월간 노출하여 브랜드 인지도를 높입니다.
+                            </p>
+                         </div>
+                      </div>
+
+                      {/* Feature 2 */}
+                      <div className="flex gap-4 group">
+                         <div className="w-12 h-12 rounded-2xl bg-brand-blue/5 border border-brand-blue/10 flex items-center justify-center shrink-0 text-brand-blue font-bold text-xl group-hover:bg-brand-blue group-hover:text-white transition-colors">2</div>
+                         <div>
+                            <h4 className="font-bold text-slate-900 text-lg mb-2">소규모 체험단 / 리뷰 유도 <span className="text-xs text-brand-blue bg-brand-blue/10 px-2 py-0.5 rounded ml-2 align-middle">선택형</span></h4>
+                            <p className="text-slate-600 text-sm leading-relaxed mb-3">
+                               검증된 마이크로 인플루언서(체험단)를 매칭하여 <br/>신뢰도 높은 초기 시술 리뷰 콘텐츠를 빠르게 확보합니다.
+                            </p>
+                            
+                            <div className="bg-slate-50 rounded-xl p-4 text-sm text-slate-700 border border-slate-100 mt-2">
+                               <div className="flex items-center gap-2 mb-2 font-bold text-slate-900">
+                                  <ShieldCheck className="w-4 h-4 text-brand-blue" /> 
+                                  <span>진행 조건 및 방식</span>
+                               </div>
+                               <ul className="space-y-2 text-slate-600 text-xs pl-1">
+                                  <li className="flex items-start gap-2">
+                                     <span className="w-1 h-1 bg-slate-400 rounded-full mt-1.5"/> 
+                                     <span><strong>병원 제공:</strong> 체험단을 위한 무료 시술 (필수)</span>
+                                  </li>
+                                  <li className="flex items-start gap-2">
+                                     <span className="w-1 h-1 bg-slate-400 rounded-full mt-1.5"/> 
+                                     <span><strong>체험단 이행:</strong> 고퀄리티 SNS 콘텐츠 제작 및 앱 내 리뷰 작성</span>
+                                  </li>
+                               </ul>
+                            </div>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+
+                {/* Visual Side */}
+                <div className="relative">
+                   <div className="absolute inset-0 bg-gradient-to-tr from-brand-blue/10 to-brand-pink/10 blur-[60px] rounded-full opacity-70" />
+                   
+                   <div className="relative grid gap-6">
+                      {/* 1. Banner Mockup */}
+                      <div className="bg-white rounded-2xl shadow-xl border border-slate-100 overflow-hidden transform hover:-translate-y-1 transition-transform duration-300">
+                          <div className="bg-slate-50 p-3 border-b border-slate-100 flex items-center justify-between">
+                             <div className="text-xs font-bold text-slate-500">App Main Banner</div>
+                             <div className="flex gap-1">
+                                <div className="w-2 h-2 rounded-full bg-red-400"/>
+                                <div className="w-2 h-2 rounded-full bg-yellow-400"/>
+                                <div className="w-2 h-2 rounded-full bg-green-400"/>
+                             </div>
+                          </div>
+                          <div className="aspect-[3/1] bg-gradient-to-r from-slate-900 to-slate-800 relative p-6 flex flex-col justify-center">
+                              <div className="absolute right-0 bottom-0 opacity-20">
+                                 <Zap className="w-24 h-24 text-white rotate-12 translate-y-4 translate-x-4" />
+                              </div>
+                              <div className="relative z-10 text-white">
+                                 <div className="text-xs font-bold text-brand-lightblue mb-1">NEW PARTNER EVENT</div>
+                                 <div className="text-xl font-black italic">GRAND OPENING</div>
+                                 <div className="text-xs text-slate-300 mt-1">Special Discount ~50% OFF</div>
+                              </div>
+                          </div>
+                      </div>
+
+                      {/* 2. Review Mockup */}
+                      <div className="bg-white rounded-2xl shadow-xl border border-slate-100 p-5 transform translate-x-4 hover:-translate-y-1 transition-transform duration-300">
+                          <div className="flex items-center gap-3 mb-4">
+                             <div className="w-10 h-10 rounded-full bg-gradient-to-br from-brand-pink to-brand-blue p-[2px]">
+                                <div className="w-full h-full rounded-full bg-white p-[2px]">
+                                   <User className="w-full h-full text-slate-300 bg-slate-100 rounded-full p-1" />
+                                </div>
+                             </div>
+                             <div>
+                                <div className="text-sm font-bold text-slate-900">Sarah_daily</div>
+                                <div className="text-[10px] text-slate-400">Singapore • Skin Care</div>
+                             </div>
+                             <div className="ml-auto text-yellow-400 flex text-xs">★★★★★</div>
+                          </div>
+                          <div className="space-y-2 mb-3">
+                             <div className="h-24 bg-slate-100 rounded-lg w-full relative overflow-hidden group">
+                                <div className="absolute inset-0 flex items-center justify-center text-slate-400 text-xs">Review Photo / Video</div>
+                             </div>
+                          </div>
+                          <p className="text-xs text-slate-600 leading-relaxed">
+                             "I visited this clinic as an influencer and I was totally amazed! The service was professional and..."
+                          </p>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+        </div>
+      </section>
+
       {/* CTA SECTION */}
       <section id="contact" className="py-20 md:py-32 bg-white border-t border-slate-100">
         <div className="max-w-4xl mx-auto px-6 text-center">
