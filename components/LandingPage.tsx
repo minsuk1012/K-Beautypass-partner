@@ -444,7 +444,7 @@ export const LandingPage = () => {
           <div className="text-center mb-16">
             <span className="text-brand-blue font-bold tracking-widest uppercase text-sm mb-2 block">Partnership Benefits</span>
             <h2 className="text-3xl md:text-5xl font-heading font-bold text-slate-900 mb-6">
-              B2B 제공 혜택 <span className="text-slate-400 font-light">(마케팅 연계)</span>
+              B2B 파트너 전용 <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-brand-pink font-black">마케팅 연계 혜택</span>
             </h2>
             <p className="text-lg text-slate-600 max-w-2xl mx-auto">
               초기 입점 병원의 성공적인 안착을 위해 <br className="hidden md:block" />
