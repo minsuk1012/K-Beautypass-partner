@@ -8,6 +8,7 @@ import {
   TrendingUp, ArrowRight, FileText, MessageSquare, User
 } from 'lucide-react';
 import Link from 'next/link';
+import { VitalConnectFloatingButton } from './VitalConnectFloatingButton';
 
 export const LandingPage = () => {
   return (
@@ -469,6 +470,8 @@ export const LandingPage = () => {
           </div>
         </div>
       </section>
+
+      <VitalConnectFloatingButton />
     </>
   );
 };

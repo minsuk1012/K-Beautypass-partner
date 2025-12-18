@@ -6,6 +6,7 @@ import { Menu, X, FileText } from 'lucide-react';
 import Link from 'next/link';
 import { BrandLogo } from './BrandLogo';
 import { usePathname, useRouter } from 'next/navigation';
+import { logout } from '@/app/partner/actions';
 
 interface Props {
   isLoggedIn: boolean;
@@ -62,14 +63,7 @@ export const Navbar = ({ isLoggedIn }: Props) => {
               </button>
             ))}
             
-            <Link 
-              href="https://vitalconnect.k-beautypass.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-brand-blue transition-colors"
-            >
-              바이탈 커넥트
-            </Link>
+
             
             <Link 
               href="/docs"
@@ -87,22 +81,19 @@ export const Navbar = ({ isLoggedIn }: Props) => {
 
             {isLoggedIn ? (
                 <button 
-                  onClick={async () => {
-                      document.cookie = 'partner_user_id=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-                      window.location.href = '/';
-                  }}
-                  className="text-slate-500 hover:text-slate-800 transition-colors"
+                  onClick={() => logout()}
+                  className="bg-brand-dark text-white px-5 py-2.5 rounded-lg text-sm font-bold hover:bg-slate-800 transition-all shadow-lg shadow-brand-dark/10"
                 >
                   로그아웃
                 </button>
-            ) : null}
-
-             <Link
-              href="/partner/onboarding"
-              className="bg-brand-dark text-white px-5 py-2.5 rounded-lg text-sm font-bold hover:bg-slate-800 transition-all shadow-lg shadow-brand-dark/10"
-            >
-              바로 입점
-            </Link>
+            ) : (
+                <Link
+                  href="/partner/onboarding"
+                  className="bg-brand-dark text-white px-5 py-2.5 rounded-lg text-sm font-bold hover:bg-slate-800 transition-all shadow-lg shadow-brand-dark/10"
+                >
+                  바로 입점
+                </Link>
+            )}
           </div>
 
           {/* Mobile Menu Toggle */}
@@ -136,15 +127,7 @@ export const Navbar = ({ isLoggedIn }: Props) => {
                   {item === 'Problems' ? '주요 과제' : item === 'Solutions' ? '솔루션' : '주요 기능'}
                 </button>
               ))}
-              <Link
-                href="https://vitalconnect.k-beautypass.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => setMobileMenuOpen(false)}
-                className="text-left text-lg font-medium text-slate-800 py-2 border-b border-slate-100"
-              >
-                바이탈 커넥트
-              </Link>
+
                <Link
                 href="/docs"
                 onClick={() => setMobileMenuOpen(false)}
@@ -159,13 +142,25 @@ export const Navbar = ({ isLoggedIn }: Props) => {
               >
                 입점 상담 신청
               </Link>
-              <Link
-                href="/partner/onboarding"
-                className="mt-4 bg-brand-blue text-white w-full py-4 rounded-xl font-bold flex items-center justify-center text-lg shadow-lg shadow-brand-blue/20"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                바로 입점
-              </Link>
+              {isLoggedIn ? (
+                <button
+                  onClick={() => {
+                    logout();
+                    setMobileMenuOpen(false);
+                  }}
+                  className="mt-4 bg-brand-blue text-white w-full py-4 rounded-xl font-bold flex items-center justify-center text-lg shadow-lg shadow-brand-blue/20"
+                >
+                  로그아웃
+                </button>
+              ) : (
+                <Link
+                  href="/partner/onboarding"
+                  className="mt-4 bg-brand-blue text-white w-full py-4 rounded-xl font-bold flex items-center justify-center text-lg shadow-lg shadow-brand-blue/20"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  바로 입점
+                </Link>
+              )}
             </div>
           </motion.div>
         )}
