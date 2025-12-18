@@ -1,34 +1,66 @@
-// app/partner/actions.ts
 'use server';
 
 import { cookies } from 'next/headers';
 import { supabaseAdmin as supabase } from '@/lib/supabaseAdmin';
-// We alias it to 'supabase' to minimize code changes in the file, 
-// or I can replace all usages. Aliasing is safer for this tool.
 import { redirect } from 'next/navigation';
 
 export async function login(formData: FormData) {
   const username = formData.get('username') as string;
   const password = formData.get('password') as string;
 
-  // Simple query to check user
   const { data: user, error } = await supabase
     .from('users')
     .select('*')
     .eq('username', username)
-    .eq('password', password) // In production, hash passwords!
     .single();
 
-  if (error || !user) {
-    return { error: 'Invalid credentials' };
+  if (error || !user || user.password !== password) {
+    return { error: '아이디 또는 비밀번호가 일치하지 않습니다.' };
   }
 
-  // Set session
   const cookieStore = await cookies();
   cookieStore.set('partner_user_id', user.id, {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
-    maxAge: 60 * 60 * 24 * 7 // 7 days
+    maxAge: 60 * 60 * 24 * 7 
+  });
+
+  return { success: true };
+}
+
+export async function register(formData: FormData) {
+  const username = formData.get('username') as string;
+  const password = formData.get('password') as string;
+
+  // Check if user exists
+  const { data: existingUser } = await supabase
+    .from('users')
+    .select('id')
+    .eq('username', username)
+    .single();
+
+  if (existingUser) {
+    return { error: '이미 존재하는 아이디입니다.' };
+  }
+
+  // Create new user
+  const { data: newUser, error: createError } = await supabase
+    .from('users')
+    .insert({ username, password })
+    .select()
+    .single();
+  
+  if (createError || !newUser) {
+      console.error('Registration Error:', createError);
+      return { error: '회원가입에 실패했습니다.' };
+  }
+
+  // Auto login (Set session)
+  const cookieStore = await cookies();
+  cookieStore.set('partner_user_id', newUser.id, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    maxAge: 60 * 60 * 24 * 7 
   });
 
   return { success: true };
@@ -41,7 +73,6 @@ export async function logout() {
 }
 
 export async function getMetadata() {
-  // Fetch categories and variations
   const { data: categories } = await supabase.from('categories').select('*').order('name');
   const { data: variations } = await supabase.from('variations').select('*').order('name');
 
@@ -57,9 +88,7 @@ export async function saveDraft(products: any[], hospitalInfo: any) {
   }
 
   try {
-    // 1. Upsert Hospital Info
     if (hospitalInfo) {
-        console.log('Upserting hospital info:', hospitalInfo);
         const { error: hospitalError } = await supabase
             .from('hospitals')
             .upsert({ 
@@ -68,51 +97,9 @@ export async function saveDraft(products: any[], hospitalInfo: any) {
                 updated_at: new Date().toISOString() 
             }, { onConflict: 'user_id' });
         
-        if (hospitalError) {
-             console.error('Hospital Upsert Error:', hospitalError);
-             throw hospitalError;
-        }
+        if (hospitalError) throw hospitalError;
     }
 
-    // 2. Upsert Products (Existing Logic)
-    // We need to upsert products. 
-    // Strategy: 
-    // 1. Delete existing products for this user (simplest for draft overwrite if we don't track updates finely)
-    // OR 2. Smart upsert. Given simplicity, full replacement for creating new set is easiest, but if we want to edit specific items...
-    // Let's assume the frontend sends the FULL state. So we can delete all and recreate, or update.
-    // Deleting all might lose IDs if we cared about them.
-    // Better: Upsert by ID if provided, insert if not.
-    // The frontend should track IDs if they exist (loaded from draft).
-
-    // Also, we might have deleted products in the UI. We need to handle deletions.
-    // Ideally user sends list of IDs to keep?
-    // Alternative: Delete all for user and re-insert. This churns UUIDs but ensures consistency perfectly for 'Draft' state.
-    // Given "Draft", overwrite is acceptable.
-    // Let's optimize: The UI sends the current full list.
-    // We can fetch existing IDs, compare with new IDs, delete missing.
-    // But "Delete All" is robust.
-    // WAIT: "Delete All" changes IDs, if we reload draft, frontend gets new IDs. That's fine.
-    
-    // REVISED STRATEGY: Delete all logic for simplicity/robustness match.
-    // Step 1: Delete all hospital_products for user. (Cascade deletes pricings)
-    // Step 2: Insert all new.
-    // DOWNSIDE: Heavy churn.
-    // COMPROMISE: If this were production, I'd do diffing. For this task... "중간 저장" (Draft).
-    // Let's stick to Replace All to avoid "ghost" data.
-    
-    // TRANSACTION? Supabase-js doesn't support transactions easily without RPC.
-    // We risk partial state.
-    // Okay, let's keep it simple: 
-    // We will assume 'id' in frontend is strictly for UI keys if temp, and real UUID if loaded.
-    // Actually, users might have 100 products. Deleting all 100 and inserting 100 every save is slow.
-    // Let's try to update if ID exists.
-    
-    // What about deleted products?
-    // We need to know which ones were deleted.
-    // Let's ask client to send `deletedProductIds`?
-    // Or just fetch current list IDs, diff with incoming IDs, delete missing.
-    
-    // Fetch current IDs to handle deletions
     const { data: currentProducts } = await supabase.from('hospital_products').select('id').eq('user_id', userId);
     const existingIds = currentProducts?.map(p => p.id) || [];
     const incomingIds = products.map(p => p.id).filter(id => id && !id.startsWith('temp-'));
@@ -122,9 +109,6 @@ export async function saveDraft(products: any[], hospitalInfo: any) {
         await supabase.from('hospital_products').delete().in('id', toDelete);
     }
     
-    // Continue with Upsert loop defined above...
-    // Redefining the loop to be complete:
-   
     for (const prod of products) {
         let productId = prod.id;
         
@@ -134,7 +118,6 @@ export async function saveDraft(products: any[], hospitalInfo: any) {
                 variation_id: prod.variation_id
             }).eq('id', productId);
             
-            // Pricings: Delete all and re-insert (easier than diffing nested array)
             await supabase.from('hospital_product_pricings').delete().eq('hospital_product_id', productId);
              const priceInserts = prod.pricings.map((p: any) => ({
                 hospital_product_id: productId,
@@ -163,7 +146,6 @@ export async function saveDraft(products: any[], hospitalInfo: any) {
         }
     }
     
-    // Update IsSubmitted false (since it's draft)
     await supabase.from('users').update({ is_submitted: false }).eq('id', userId);
 
     return { success: true };
@@ -175,7 +157,6 @@ export async function saveDraft(products: any[], hospitalInfo: any) {
 }
 
 export async function submitFinal(products: any[], hospitalInfo: any) {
-    // Save first
     const saveResult = await saveDraft(products, hospitalInfo);
     if (saveResult.error) return saveResult;
     
@@ -186,7 +167,6 @@ export async function submitFinal(products: any[], hospitalInfo: any) {
         await supabase.from('users').update({ is_submitted: true }).eq('id', userId);
     }
     
-    // Send Slack Notification
     if (hospitalInfo && products.length > 0) {
         await sendSlackNotification(hospitalInfo, products);
     }
@@ -267,7 +247,7 @@ async function sendSlackNotification(hospital: any, products: any[]) {
                             text: "관리자 페이지에서 보기",
                             emoji: true
                         },
-                        url: `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/admin`,
+                        url: `https://partner.k-beautypass.com/admin`,
                         style: "primary"
                     }
                 ]
@@ -297,70 +277,25 @@ export async function undoSubmit() {
     return { error: 'Unauthorized' };
 }
 
-
-export async function loginOrRegister(formData: FormData) {
-  const username = formData.get('username') as string;
-  const password = formData.get('password') as string;
-
-  // Check if user exists
-  const { data: existingUser } = await supabase
-    .from('users')
-    .select('*')
-    .eq('username', username)
-    .single();
-
-  let user = existingUser;
-
-  if (existingUser) {
-      if (existingUser.password !== password) {
-          return { error: 'Invalid password' };
-      }
-  } else {
-      // Create new user
-      const { data: newUser, error: createError } = await supabase
-        .from('users')
-        .insert({ username, password })
-        .select()
-        .single();
-      
-      if (createError) return { error: 'Failed to create account' };
-      user = newUser;
-  }
-
-  // Set session
-  const cookieStore = await cookies();
-  cookieStore.set('partner_user_id', user.id, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    maxAge: 60 * 60 * 24 * 7 // 7 days
-  });
-
-  return { success: true };
-}
-
 export async function loadData() {
     const cookieStore = await cookies();
     const userId = cookieStore.get('partner_user_id')?.value;
     
     if (!userId) return { success: false, error: 'Not logged in' };
 
-    // Use supabaseAdmin to bypass RLS (aliased as supabase)
-    // Fetch Hospital Info
-    const { data: hospital, error: hError } = await supabase
+    const { data: hospital } = await supabase
         .from('hospitals')
         .select('*')
         .eq('user_id', userId)
         .single();
         
-    // Fetch User Info (for is_submitted status)
-    const { data: user, error: uError } = await supabase
+    const { data: user } = await supabase
         .from('users')
         .select('is_submitted')
         .eq('id', userId)
         .single();
     
-    // Fetch Products
-    const { data: products, error: pError } = await supabase
+    const { data: products } = await supabase
         .from('hospital_products')
         .select(`
             id, name, variation_id,

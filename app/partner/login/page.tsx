@@ -1,11 +1,12 @@
 'use client';
 
 import React, { useState } from 'react';
-import { login } from '../actions';
+import { login, register } from '../actions';
 import { BrandLogo } from '@/components/BrandLogo';
 import { useRouter } from 'next/navigation';
 
 export default function PartnerLoginPage() {
+  const [isLoginMode, setIsLoginMode] = useState(true);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -15,7 +16,9 @@ export default function PartnerLoginPage() {
     setError('');
     
     try {
-      const result = await login(formData);
+      const action = isLoginMode ? login : register;
+      const result = await action(formData);
+      
       if (result?.success) {
         router.push('/partner/onboarding');
       } else if (result?.error) {
@@ -24,7 +27,7 @@ export default function PartnerLoginPage() {
       }
     } catch (e) {
       console.error(e);
-      setError('An error occurred');
+      setError('오류가 발생했습니다. 다시 시도해주세요.');
       setLoading(false);
     }
   };
@@ -34,8 +37,42 @@ export default function PartnerLoginPage() {
       <div className="max-w-md w-full bg-white p-8 rounded-2xl shadow-xl border border-slate-100">
         <div className="flex flex-col items-center mb-8">
           <BrandLogo className="w-12 h-12 mb-4" />
-          <h1 className="text-2xl font-bold text-slate-900">파트너 로그인</h1>
-          <p className="text-slate-500 text-sm">로그인 시 회원가입</p>
+          <h1 className="text-2xl font-bold text-slate-900">
+            {isLoginMode ? '파트너 로그인' : '파트너 회원가입'}
+          </h1>
+          <p className="text-slate-500 text-sm mt-1">K-Beauty Pass Partners</p>
+        </div>
+
+        {/* Tab Switcher */}
+        <div className="flex p-1 bg-slate-100 rounded-lg mb-6">
+            <button
+                type="button"
+                onClick={() => {
+                    setIsLoginMode(true);
+                    setError('');
+                }}
+                className={`flex-1 py-2 text-sm font-bold rounded-md transition-all ${
+                    isLoginMode 
+                    ? 'bg-white text-slate-900 shadow-sm' 
+                    : 'text-slate-500 hover:text-slate-700'
+                }`}
+            >
+                로그인
+            </button>
+            <button
+                type="button"
+                onClick={() => {
+                    setIsLoginMode(false);
+                    setError('');
+                }}
+                className={`flex-1 py-2 text-sm font-bold rounded-md transition-all ${
+                    !isLoginMode 
+                    ? 'bg-white text-slate-900 shadow-sm' 
+                    : 'text-slate-500 hover:text-slate-700'
+                }`}
+            >
+                회원가입
+            </button>
         </div>
 
         <form action={handleSubmit} className="space-y-4">
@@ -72,13 +109,8 @@ export default function PartnerLoginPage() {
             disabled={loading}
             className="w-full bg-slate-900 text-white py-3 rounded-lg font-bold hover:bg-slate-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed mt-2"
           >
-            {loading ? '로그인 중...' : '로그인 / 회원가입'}
+            {loading ? '처리 중...' : (isLoginMode ? '로그인' : '회원가입 및 바로 시작')}
           </button>
-          
-          <p className="text-xs text-center text-slate-400 mt-4">
-             새로운 아이디를 입력하시면 자동으로 회원가입 처리됩니다.
-             <br/>(임시 기능: 비밀번호를 잊지 마세요)
-          </p>
         </form>
       </div>
     </div>

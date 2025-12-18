@@ -11,7 +11,7 @@ export const Footer = () => {
               <div className="font-heading text-lg font-bold text-slate-900">KBEAUTYPASS</div>
            </div>
            <p className="text-sm text-slate-500 mb-2">서울특별시 강남구 역삼로 114, 8층 8071호</p>
-           <p className="text-sm text-slate-500">입점 문의: partner@k-beautypass.com</p>
+           <p className="text-sm text-slate-500">입점 문의: kbeautypass@gmail.com</p>
         </div>
         
         <div className="text-sm text-slate-400">

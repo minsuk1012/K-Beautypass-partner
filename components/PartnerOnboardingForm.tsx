@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { saveDraft, submitFinal, loginOrRegister, undoSubmit } from '@/app/partner/actions';
+import { saveDraft, submitFinal, login, register, undoSubmit } from '@/app/partner/actions';
 import { Trash2, Plus, Save, Send, AlertCircle, X, Copy, Building2, Stethoscope, Loader2 } from 'lucide-react';
 import { BrandLogo } from './BrandLogo';
 import HospitalInfoForm from './HospitalInfoForm';
@@ -75,6 +75,7 @@ export default function PartnerOnboardingForm({ categories, variations, initialP
     const [isLoggedIn, setIsLoggedIn] = useState(initialIsLoggedIn);
     const [showLoginModal, setShowLoginModal] = useState(false);
     const [pendingAction, setPendingAction] = useState<'draft' | 'final' | null>(null);
+    const [isLoginMode, setIsLoginMode] = useState(true);
     const router = useRouter();
 
     useEffect(() => {
@@ -340,7 +341,9 @@ export default function PartnerOnboardingForm({ categories, variations, initialP
     };
 
     const handleLoginSubmit = async (formData: FormData) => {
-        const result = await loginOrRegister(formData);
+        const action = isLoginMode ? login : register;
+        const result = await action(formData);
+        
         if (result.success) {
             setIsLoggedIn(true);
             setShowLoginModal(false);
@@ -700,8 +703,38 @@ export default function PartnerOnboardingForm({ categories, variations, initialP
                         
                         <div className="text-center mb-6">
                              <BrandLogo className="w-10 h-10 mb-3" />
-                             <h3 className="text-xl font-bold text-slate-900">저장 전 로그인/가입</h3>
-                             <p className="text-sm text-slate-500">작성하신 내용은 계정에 안전하게 저장됩니다.<br/>(신규 ID 입력 시 자동으로 회원가입 처리됩니다)</p>
+                             <h3 className="text-xl font-bold text-slate-900">
+                                {isLoginMode ? '저장 전 로그인' : '파트너 회원가입'}
+                             </h3>
+                             <p className="text-sm text-slate-500">
+                                {isLoginMode ? '작성 내용을 저장하려면 로그인이 필요합니다.' : '계정을 생성하고 작성 내용을 안전하게 저장하세요.'}
+                             </p>
+                        </div>
+
+                        {/* Tab Switcher */}
+                        <div className="flex p-1 bg-slate-100 rounded-lg mb-6">
+                            <button
+                                type="button"
+                                onClick={() => setIsLoginMode(true)}
+                                className={`flex-1 py-2 text-sm font-bold rounded-md transition-all ${
+                                    isLoginMode 
+                                    ? 'bg-white text-slate-900 shadow-sm' 
+                                    : 'text-slate-500 hover:text-slate-700'
+                                }`}
+                            >
+                                로그인
+                            </button>
+                            <button
+                                type="button"
+                                onClick={() => setIsLoginMode(false)}
+                                className={`flex-1 py-2 text-sm font-bold rounded-md transition-all ${
+                                    !isLoginMode 
+                                    ? 'bg-white text-slate-900 shadow-sm' 
+                                    : 'text-slate-500 hover:text-slate-700'
+                                }`}
+                            >
+                                회원가입
+                            </button>
                         </div>
 
                         <form action={handleLoginSubmit} className="space-y-4">
@@ -714,7 +747,7 @@ export default function PartnerOnboardingForm({ categories, variations, initialP
                                 <input name="password" type="password" required className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-brand-blue/20 outline-none" placeholder="비밀번호 입력" />
                             </div>
                             <button type="submit" className="w-full py-3 bg-brand-blue text-white font-bold rounded-lg hover:bg-blue-600 transition-colors">
-                                로그인 / 회원가입 및 저장
+                                {isLoginMode ? '로그인 및 저장' : '회원가입 및 저장'}
                             </button> 
                         </form>
                     </div>

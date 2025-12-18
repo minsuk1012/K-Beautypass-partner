@@ -917,7 +917,7 @@ const DOCS_DATA: DocCategory[] = [
              <div className="space-y-2 text-sm">
                 <div className="flex items-center gap-2">
                    <div className="w-20 font-bold text-slate-500">이메일</div>
-                   <div className="text-brand-blue underline">partner@k-beautypass.com</div>
+                   <div className="text-brand-blue underline">kbeautypass@gmail.com</div>
                 </div>
                 <div className="flex items-center gap-2">
                    <div className="w-20 font-bold text-slate-500">문의 전화</div>
