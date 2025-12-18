@@ -146,6 +146,10 @@ export default async function HospitalDetailPage({ params }: PageProps) {
                                         <label className="text-xs font-bold text-slate-400 uppercase">Business No.</label>
                                         <p className="text-slate-900">{hospital.business_registration_number || '-'}</p>
                                     </div>
+                                    <div>
+                                        <label className="text-xs font-bold text-slate-400 uppercase">Hospital Phone</label>
+                                        <p className="text-slate-900">{hospital.phone || '-'}</p>
+                                    </div>
                                 </div>
                             </div>
                             
@@ -154,18 +158,27 @@ export default async function HospitalDetailPage({ params }: PageProps) {
                                     <MapPin className="w-5 h-5 text-slate-400 mt-0.5" />
                                     <div>
                                         <label className="text-xs font-bold text-slate-400 uppercase">Address</label>
-                                        <p className="text-slate-900">{hospital.address} {hospital.detailed_address}</p>
-                                        <p className="text-xs text-slate-500 mt-0.5">{hospital.district}</p>
+                                        <p className="text-slate-900">{hospital.address}</p>
+                                        <p className="text-slate-700">{hospital.detailed_address}</p>
+                                        <p className="text-xs text-slate-500 mt-1 flex items-center gap-1">
+                                            <span className="inline-block w-1.5 h-1.5 rounded-full bg-slate-300"></span>
+                                            {hospital.district}
+                                        </p>
                                     </div>
                                 </div>
                                 <div className="flex items-start gap-3">
                                     <Globe className="w-5 h-5 text-slate-400 mt-0.5" />
-                                    <div>
-                                        <label className="text-xs font-bold text-slate-400 uppercase">Online</label>
-                                        <p className="text-slate-900">
-                                            {hospital.website ? <a href={hospital.website} target="_blank" className="text-brand-blue hover:underline">{hospital.website}</a> : '-'}
-                                        </p>
-                                        <p className="text-sm text-slate-600 truncate">{hospital.email || '-'}</p>
+                                    <div className="space-y-3 w-full">
+                                        <div>
+                                            <label className="text-xs font-bold text-slate-400 uppercase">Website</label>
+                                            <p className="text-slate-900 truncate">
+                                                {hospital.website ? <a href={hospital.website} target="_blank" className="text-brand-blue hover:underline">{hospital.website}</a> : '-'}
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <label className="text-xs font-bold text-slate-400 uppercase">Email</label>
+                                            <p className="text-slate-900 truncate">{hospital.email || '-'}</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -198,7 +211,29 @@ export default async function HospitalDetailPage({ params }: PageProps) {
                         </div>
                     </div>
 
-                    {/* 2. Interior Images */}
+                    {/* 2. Hospital Logo */}
+                    <div className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+                        <div className="p-4 border-b border-slate-100 bg-slate-50 font-medium text-slate-700 flex items-center gap-2">
+                            <ImageIcon className="w-4 h-4" /> Hospital Logo
+                        </div>
+                        <div className="p-8 flex justify-center bg-slate-50/50">
+                            {hospital.logo_url ? (
+                                <div className="relative group">
+                                     <img src={hospital.logo_url} alt="Hospital Logo" className="max-w-xs max-h-60 object-contain rounded-lg border border-slate-200 shadow-sm bg-white" />
+                                     <a href={hospital.logo_url} target="_blank" className="absolute bottom-2 right-2 bg-black/50 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
+                                        View Original
+                                     </a>
+                                </div>
+                            ) : (
+                                <div className="flex flex-col items-center justify-center py-8 text-slate-400">
+                                    <Building className="w-12 h-12 mb-2 opacity-20" />
+                                    <p className="text-sm">No logo uploaded.</p>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+
+                    {/* 3. Interior Images */}
                     <div className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
                          <div className="p-4 border-b border-slate-100 bg-slate-50 font-medium text-slate-700 flex items-center gap-2">
                             <ImageIcon className="w-4 h-4" /> Interior Images ({hospital.interior_images?.length || 0})
@@ -209,6 +244,9 @@ export default async function HospitalDetailPage({ params }: PageProps) {
                                     {hospital.interior_images.map((img: string, idx: number) => (
                                         <div key={idx} className="relative aspect-[4/3] group">
                                             <img src={img} alt={`Interior ${idx}`} className="w-full h-full object-cover rounded-lg border border-slate-100 shadow-sm group-hover:shadow transition-all" />
+                                            <a href={img} target="_blank" className="absolute bottom-2 right-2 bg-black/50 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
+                                                View
+                                            </a>
                                         </div>
                                     ))}
                                 </div>

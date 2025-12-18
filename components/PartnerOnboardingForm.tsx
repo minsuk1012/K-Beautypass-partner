@@ -323,6 +323,8 @@ export default function PartnerOnboardingForm({ categories, variations, initialP
                     ...prev,
                     logo_file: null,
                     interior_files: [],
+                    logo_preview: undefined,
+                    interior_previews: [],
                     logo_url: logoUrl, // Update with real URL
                     interior_images: interiorImages
                 }));
