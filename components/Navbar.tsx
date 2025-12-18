@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-import { Menu, X, FileText } from 'lucide-react';
+import { Menu, X, FileText, LogOut } from 'lucide-react';
 import Link from 'next/link';
 import { BrandLogo } from './BrandLogo';
 import { usePathname, useRouter } from 'next/navigation';
@@ -79,20 +79,20 @@ export const Navbar = ({ isLoggedIn }: Props) => {
               입점 상담 신청
             </Link>
 
-            {isLoggedIn ? (
-                <button 
+            <Link
+              href="/partner/onboarding"
+              className="bg-brand-dark text-white px-5 py-2.5 rounded-lg text-sm font-bold hover:bg-slate-800 transition-all shadow-lg shadow-brand-dark/10"
+            >
+              바로 입점
+            </Link>
+
+            {isLoggedIn && (
+               <button 
                   onClick={() => logout()}
-                  className="bg-brand-dark text-white px-5 py-2.5 rounded-lg text-sm font-bold hover:bg-slate-800 transition-all shadow-lg shadow-brand-dark/10"
+                  className="text-slate-500 hover:text-slate-900 font-bold text-sm flex items-center gap-1 transition-colors"
                 >
-                  로그아웃
+                  <LogOut className="w-4 h-4" /> 로그아웃
                 </button>
-            ) : (
-                <Link
-                  href="/partner/onboarding"
-                  className="bg-brand-dark text-white px-5 py-2.5 rounded-lg text-sm font-bold hover:bg-slate-800 transition-all shadow-lg shadow-brand-dark/10"
-                >
-                  바로 입점
-                </Link>
             )}
           </div>
 
@@ -142,25 +142,13 @@ export const Navbar = ({ isLoggedIn }: Props) => {
               >
                 입점 상담 신청
               </Link>
-              {isLoggedIn ? (
-                <button
-                  onClick={() => {
-                    logout();
-                    setMobileMenuOpen(false);
-                  }}
-                  className="mt-4 bg-brand-blue text-white w-full py-4 rounded-xl font-bold flex items-center justify-center text-lg shadow-lg shadow-brand-blue/20"
-                >
-                  로그아웃
-                </button>
-              ) : (
-                <Link
-                  href="/partner/onboarding"
-                  className="mt-4 bg-brand-blue text-white w-full py-4 rounded-xl font-bold flex items-center justify-center text-lg shadow-lg shadow-brand-blue/20"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  바로 입점
-                </Link>
-              )}
+              <Link
+                href="/partner/onboarding"
+                className="mt-4 bg-brand-blue text-white w-full py-4 rounded-xl font-bold flex items-center justify-center text-lg shadow-lg shadow-brand-blue/20"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                바로 입점
+              </Link>
             </div>
           </motion.div>
         )}

@@ -350,6 +350,7 @@ export default function PartnerOnboardingForm({ categories, variations, initialP
             if (result.success) {
                 setIsLoggedIn(true);
                 setShowLoginModal(false);
+                router.refresh(); // Sync server state (header logout button)
                 if (pendingAction) {
                     executeSave(pendingAction === 'final');
                     setPendingAction(null);

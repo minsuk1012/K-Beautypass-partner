@@ -69,7 +69,7 @@ export async function register(formData: FormData) {
 export async function logout() {
   const cookieStore = await cookies();
   cookieStore.delete('partner_user_id');
-  redirect('/partner/login');
+  redirect('/partner/onboarding');
 }
 
 export async function getMetadata() {
@@ -281,7 +281,14 @@ export async function loadData() {
     const cookieStore = await cookies();
     const userId = cookieStore.get('partner_user_id')?.value;
     
-    if (!userId) return { success: false, error: 'Not logged in' };
+    if (!userId) {
+        return { 
+            isLoggedIn: false,
+            products: [], 
+            hospitalInfo: null,
+            isSubmitted: false 
+        };
+    }
 
     const { data: hospital } = await supabase
         .from('hospitals')
