@@ -1,0 +1,65 @@
+@import "tailwindcss";
+
+:root {
+  /* Base Colors */
+  --background: #ffffff;
+  --foreground: #111827;
+
+  /* Brand Colors Setup (Extracted from Logo) */
+  --brand-blue: #558FFF;       /* Main Identity */
+  --brand-blue-soft: #CCDDFF;  /* Secondary / Glass tint */
+  --brand-blue-deep: #2B4C8C;  /* Text / Footer */
+  
+  --brand-navy: #0F172A;       /* High Impact Background */
+  --brand-navy-light: #1E293B; /* High Impact Cards */
+
+  --brand-red: #FF4343;        /* Vivid Accent */
+  --brand-red-soft: #FFC4C4;   /* Soft Shape */
+  
+  --brand-slate: #F8FAFC;
+  
+  /* Pop Identity */
+  --gradient-pop: linear-gradient(135deg, #F0ABFC 0%, #A855F7 50%, #3B82F6 100%); /* Pink -> Purple -> Blue */
+  --shadow-browser: 0 30px 60px -12px rgba(50, 50, 93, 0.25), 0 18px 36px -18px rgba(0, 0, 0, 0.3);
+}
+
+@theme {
+  /* Brand Mapping */
+  --color-brand-blue: #558FFF;
+  --color-brand-blue-soft: #CCDDFF;
+  --color-brand-blue-deep: #2B4C8C;
+  
+  --color-brand-dark: #0F172A;
+  --color-brand-dark-light: #1E293B;
+
+  --color-brand-red: #FF4343;
+  --color-brand-red-soft: #FFC4C4;
+  
+  --color-brand-slate: #F8FAFC;
+  
+  /* Standard Utility Mapping */
+  --color-background: #ffffff;
+  --color-foreground: #111827;
+
+  /* Animations for Organic Gradients */
+  --animate-flow: flow 10s ease-in-out infinite;
+  --animate-blob: blob 7s infinite;
+  
+  @keyframes flow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  @keyframes blob {
+    0% { transform: translate(0px, 0px) scale(1); }
+    33% { transform: translate(30px, -50px) scale(1.1); }
+    66% { transform: translate(-20px, 20px) scale(0.9); }
+    100% { transform: translate(0px, 0px) scale(1); }
+  }
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
