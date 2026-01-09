@@ -152,10 +152,10 @@ export default function Hero({ customTitle, customSubtitle, customBadge, customC
             className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-24 w-full"
         >
             <Link 
-                href="/signup"
+                href="https://www.k-beautypass.com/partner/apply"
                 className="w-full sm:w-auto px-12 py-5 rounded-full bg-gray-900 text-white font-bold text-lg transition-all shadow-xl hover:shadow-2xl hover:scale-105 flex items-center justify-center gap-2 group"
             >
-                {customCta || "무료로 시작하기"}
+                {customCta || "바로 입점신청"}
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Link>
             <button
