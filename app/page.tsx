@@ -19,8 +19,10 @@ import PhoneFrame from './components/PhoneFrame';
 import FAQ from './components/FAQ';
 
 import Link from 'next/link';
+import { trackNavClick, trackOnboardingClick } from './lib/analytics';
 
 const scrollTo = (id: string) => {
+  trackNavClick(id);
   const element = document.getElementById(id);
   if (element) {
     element.scrollIntoView({ behavior: 'smooth', block: 'start' });

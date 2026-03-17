@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { trackPartnerServiceClick } from "../lib/analytics";
 
 export default function FloatingCTA() {
   const [showTooltip, setShowTooltip] = useState(false);
@@ -56,6 +57,7 @@ export default function FloatingCTA() {
           href="https://vitalconnect.k-beautypass.com"
           target="_blank"
           rel="noopener noreferrer"
+          onClick={trackPartnerServiceClick}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ type: "spring", stiffness: 300, damping: 25, delay: 0.1 }}

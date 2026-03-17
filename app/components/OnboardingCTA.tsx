@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { ArrowRight, Check, Rocket } from 'lucide-react';
 import InquiryForm from './InquiryForm';
+import { trackOnboardingClick } from '../lib/analytics';
 
 export default function OnboardingCTA() {
   return (
@@ -34,7 +35,7 @@ export default function OnboardingCTA() {
              </p>
 
              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                 <Link href="https://www.k-beautypass.com/partner/apply" className="px-8 py-4 bg-brand-blue text-white font-bold rounded-xl text-lg hover:bg-blue-600 transition-all shadow-lg hover:shadow-brand-blue/50 flex items-center justify-center gap-2">
+                 <Link href="https://www.k-beautypass.com/partner/apply" onClick={trackOnboardingClick} className="px-8 py-4 bg-brand-blue text-white font-bold rounded-xl text-lg hover:bg-blue-600 transition-all shadow-lg hover:shadow-brand-blue/50 flex items-center justify-center gap-2">
                     온라인 입점 신청하기 <ArrowRight size={20} />
                  </Link>
                  <div className="px-8 py-4 bg-white/5 text-gray-300 font-bold rounded-xl text-lg border border-white/10 flex items-center justify-center gap-2">

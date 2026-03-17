@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Send, Check, Loader2 } from 'lucide-react';
+import { trackInquirySubmit } from '../lib/analytics';
 
 interface FormData {
   hospitalName: string;
@@ -52,6 +53,7 @@ export default function InquiryForm() {
         throw new Error(result.error || '전송에 실패했습니다.');
       }
 
+      trackInquirySubmit(formData.hospitalName);
       setIsSuccess(true);
       setFormData({
         hospitalName: '',
