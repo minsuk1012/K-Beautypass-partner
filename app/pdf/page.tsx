@@ -195,7 +195,6 @@ export default function PartnerPage() {
 
                 {formState === 'success' ? (
                   <div className="text-center py-8">
-                    <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
                     <p className="text-xl font-bold mb-2">문의가 접수되었습니다!</p>
                     <p className="text-gray-500 text-sm">영업일 기준 1~2일 내에 연락드리겠습니다.</p>
                     <button
@@ -274,9 +273,6 @@ export default function PartnerPage() {
                       </button>
                     </form>
 
-                    <p className="text-sm text-gray-400 mt-4 text-center">
-                      또는 <a href="mailto:team@k-beautypass.com" className="text-brand-blue font-medium hover:underline">team@k-beautypass.com</a>으로 문의
-                    </p>
                   </>
                 )}
               </div>

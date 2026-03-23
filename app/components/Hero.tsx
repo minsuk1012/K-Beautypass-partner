@@ -151,13 +151,13 @@ export default function Hero({ customTitle, customSubtitle, customBadge, customC
             transition={{ duration: 0.8, delay: 0.3 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-24 w-full"
         >
-            <Link 
-                href="https://www.k-beautypass.com/partner/apply"
-                className="w-full sm:w-auto px-12 py-5 rounded-full bg-gray-900 text-white font-bold text-lg transition-all shadow-xl hover:shadow-2xl hover:scale-105 flex items-center justify-center gap-2 group"
+            <button
+                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
+                className="w-full sm:w-auto px-12 py-5 rounded-full bg-gray-900 text-white font-bold text-lg transition-all shadow-xl hover:shadow-2xl hover:scale-105 flex items-center justify-center gap-2 group cursor-pointer"
             >
                 {customCta || "바로 입점신청"}
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </Link>
+            </button>
             <button
                 onClick={() => document.getElementById('features')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
                 className="w-full sm:w-auto px-12 py-5 rounded-full bg-white border border-gray-200 text-gray-900 font-bold text-lg hover:border-gray-400 transition-all shadow-lg hover:shadow-xl flex items-center justify-center cursor-pointer"

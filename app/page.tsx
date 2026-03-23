@@ -47,6 +47,7 @@ export default function Home() {
                 <button onClick={() => scrollTo('features')} className="hover:text-brand-navy transition-colors cursor-pointer">주요 기능</button>
                 <button onClick={() => scrollTo('faq')} className="hover:text-brand-navy transition-colors cursor-pointer hidden sm:block">FAQ</button>
                 <button onClick={() => scrollTo('contact')} className="hover:text-brand-navy transition-colors cursor-pointer hidden sm:block">문의</button>
+                <Link href="/pdf" className="px-3 py-1.5 rounded-full bg-brand-blue text-white hover:bg-brand-blue/90 transition-colors">제안서</Link>
             </nav>
         </div>
       </header>

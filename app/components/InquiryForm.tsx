@@ -100,6 +100,7 @@ export default function InquiryForm() {
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
+      id="inquiry-form"
       className="bg-white rounded-2xl p-6 shadow-2xl relative"
     >
       <div className="absolute -top-4 -right-4 bg-green-500 text-white px-4 py-2 rounded-lg font-bold shadow-lg transform rotate-6 text-sm">
