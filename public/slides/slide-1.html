@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=1280, height=720, initial-scale=1.0" name="viewport"/>
+<title>KBEAUTYPASS Cover</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f3f4f6;
+            overflow: hidden;
+        }
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            position: relative;
+            background-color: #ffffff;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .text-primary { color: #6100FF; }
+        .bg-primary { background-color: #6100FF; }
+        .bg-primary-soft { background-color: rgba(97, 0, 255, 0.1); }
+        .text-accent { color: #EC4899; }
+        .bg-accent { background-color: #EC4899; }
+        .bg-accent-soft { background-color: rgba(236, 72, 153, 0.1); }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+            border-bottom: 4px solid transparent;
+        }
+        /* Gradient simulation using box-shadow instead of background-image to avoid export issues */
+        .card-active-border {
+            
+            /* border-bottom removed as requested */
+        }
+    </style>
+</head>
+<body>
+<div class="slide-container">
+<!-- Background Decorations (SVG shapes instead of CSS gradients) -->
+<svg style="position: absolute; top: 0; right: 0; width: 600px; height: 600px; z-index: 0;" viewbox="0 0 100 100">
+<circle cx="80" cy="20" fill="#F3E8FF" fill-opacity="0.6" r="50"></circle>
+</svg>
+<svg style="position: absolute; bottom: 0; left: 0; width: 500px; height: 500px; z-index: 0;" viewbox="0 0 100 100">
+<circle cx="20" cy="80" fill="#FDF2F8" fill-opacity="0.8" r="40"></circle>
+</svg>
+<!-- Main Content Wrapper -->
+<div class="relative z-10 w-full max-w-6xl px-10 flex flex-col items-center">
+<!-- Logo Section -->
+<div class="flex items-center justify-center gap-3 mb-12">
+<!-- Inline SVG Logo provided by user -->
+<svg fill="none" height="36" viewbox="0 0 24 24" width="36" xmlns="http://www.w3.org/2000/svg">
+<rect fill="#CCDDFF" height="14.1405" rx="7.07027" width="18.0324" x="5.70834"></rect>
+<rect fill="#558FFF" height="14.1405" rx="7.07027" width="18.0324" x="5.70821" y="9.85957"></rect>
+<path d="M16.6179 7.38209L7.38208 16.6179C4.65791 19.3421 -2.87939e-07 17.4127 -4.5634e-07 13.5602L-8.60051e-07 4.32433C-9.64445e-07 1.93607 1.93606 1.82272e-06 4.32432 1.71833e-06L13.5602 1.31462e-06C17.4127 1.14621e-06 19.3421 4.65791 16.6179 7.38209Z" fill="#FFC4C4"></path>
+<path d="M7.38209 7.38209L16.6179 16.6179C19.3421 19.3421 17.4127 24 13.5602 24L4.32433 24C1.93607 24 5.8913e-06 22.0639 6.10009e-06 19.6757L6.90751e-06 10.4398C7.24431e-06 6.58728 4.65792 4.65791 7.38209 7.38209Z" fill="#FF4343"></path>
+</svg>
+<div class="flex items-center h-9">
+<p class="text-4xl font-black text-gray-900 tracking-tight" style="font-size: 36px; line-height: 1;">KBEAUTYPASS</p>
+</div>
+</div>
+<!-- Hero Text Section -->
+<div class="text-center mb-20">
+<p class="text-base font-bold text-slate-500 tracking-[0.2em] uppercase mb-6">Hospital Partner Proposal</p>
+<div class="mb-8">
+<p class="text-6xl font-black text-gray-900 leading-tight mb-2">외국인 환자를</p>
+<div class="relative inline-block">
+<p class="text-6xl font-black text-gray-900 leading-tight relative z-10">우리 병원으로 초대하세요</p>
+<!-- Underline Highlight -->
+<div class="absolute bottom-2 left-0 w-full h-5 bg-purple-200 opacity-50 -z-0 transform -rotate-1 rounded-sm"></div>
+</div>
+</div>
+<p class="text-2xl font-light text-slate-500">글로벌 의료관광의 새로운 표준, KBEAUTYPASS</p>
+</div>
+<!-- Value Proposition Cards Grid -->
+<div class="grid grid-cols-4 gap-6 w-full">
+<!-- Card 1: Pricing (Merged) -->
+<div class="bg-white rounded-2xl p-6 border border-gray-200 flex flex-col items-center text-center card-hover hover: hover:-translate-y-1">
+<div class="w-14 h-14 rounded-full bg-primary-soft flex items-center justify-center mb-4 text-primary text-2xl">
+<i class="fa-solid fa-won-sign"></i>
+</div>
+<p class="text-lg font-bold text-gray-800 mb-1">입점비 0원</p>
+<p class="text-sm text-gray-500 leading-relaxed">초기 비용 부담 없는<br/>성과형 15% 수수료</p>
+</div>
+<!-- Card 2: AI Translation (Kept) -->
+<div class="bg-white rounded-2xl p-6 border border-gray-200 flex flex-col items-center text-center card-hover hover: hover:-translate-y-1">
+<div class="w-14 h-14 rounded-full bg-accent-soft flex items-center justify-center mb-4 text-accent text-2xl">
+<i class="fa-solid fa-language"></i>
+</div>
+<p class="text-lg font-bold text-gray-800 mb-1">AI 자동번역</p>
+<p class="text-sm text-gray-500 leading-relaxed">언어 장벽 없는<br/>실시간 채팅 상담</p>
+</div>
+<!-- Card 3: Experience Group (New) -->
+<div class="bg-white rounded-2xl p-6 border border-gray-200 flex flex-col items-center text-center card-hover hover: hover:-translate-y-1">
+<div class="w-14 h-14 rounded-full bg-blue-50 flex items-center justify-center mb-4 text-blue-600 text-2xl">
+<i class="fa-solid fa-users-viewfinder"></i>
+</div>
+<p class="text-lg font-bold text-gray-800 mb-1">외국인 체험단</p>
+<p class="text-sm text-gray-500 leading-relaxed">입점 시 3건 무료 지원<br/>초기 리뷰 확보</p>
+</div>
+<!-- Card 4: Video Support (Revised) -->
+<div class="bg-white rounded-2xl p-6 border border-gray-200 flex flex-col items-center text-center card-hover hover: hover:-translate-y-1">
+<div class="w-14 h-14 rounded-full bg-green-50 flex items-center justify-center mb-4 text-green-600 text-2xl">
+<i class="fa-solid fa-video"></i>
+</div>
+<p class="text-lg font-bold text-gray-800 mb-1">체험단 영상 활용</p>
+<p class="text-sm text-gray-500 leading-relaxed">체험단 방문 영상을<br/>2차 활용 가능한 콘텐츠로 제공</p>
+</div>
+</div>
+<!-- Footer Date -->
+<div class="absolute bottom-[-60px] text-gray-400 text-xs font-medium">
+<p>2026 KBEAUTYPASS Introduction Pitch Deck</p>
+</div>
+</div>
+</div>
+</body>
+</html>

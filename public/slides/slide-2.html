@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Market Opportunity &amp; Challenges</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f3f4f6;
+        }
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            background-color: #ffffff;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .text-primary { color: #6100FF; }
+        .bg-primary { background-color: #6100FF; }
+        .bg-primary-light { background-color: #F3E8FF; }
+        .text-accent { color: #EC4899; }
+        .bg-accent { background-color: #EC4899; }
+        
+        /* Custom layout for split screen */
+        .split-layout {
+            display: flex;
+            flex: 1;
+            height: 100%;
+        }
+        .left-panel {
+            width: 40%;
+            background-color: #6100FF; /* Primary Brand Color */
+            color: white;
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+        .right-panel {
+            width: 60%;
+            background-color: #FAFAFA;
+            padding: 3rem 4rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        /* Decor shapes for left panel using solid colors */
+        .circle-decor-1 {
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        .circle-decor-2 {
+            position: absolute;
+            bottom: 50px;
+            right: -20px;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background-color: rgba(236, 72, 153, 0.2); /* Accent color with opacity */
+        }
+
+        /* Card Styles */
+        .pain-point-card {
+            background-color: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            
+            /* border-left removed as requested */
+            transition: transform 0.2s;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .kpi-number {
+            font-size: 4.5rem;
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+        
+        .section-tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+<div class="slide-container">
+<div class="split-layout">
+<!-- Left Panel: Market Opportunity -->
+<div class="left-panel">
+<div class="circle-decor-1"></div>
+<div class="circle-decor-2"></div>
+<div class="relative z-10">
+<div class="mb-8">
+<p><span class="section-tag bg-white text-primary">Market Opportunity</span></p>
+<h2 class="text-3xl font-bold mb-2">급성장하는<br/>한국 의료관광 시장</h2>
+<p class="text-white text-opacity-80 font-light">폭발적인 수요 증가, 준비된 병원만이 기회를 잡습니다.</p>
+</div>
+<div class="space-y-10">
+<!-- KPI 1 -->
+<div>
+<div class="kpi-number text-white">180<span class="text-3xl font-normal ml-1">만+</span></div>
+<div class="flex items-center gap-2 text-white text-opacity-90">
+<i class="fa-solid fa-users text-accent"></i>
+<p class="text-lg font-medium">월 외래객 방한 (2025 기준)</p>
+</div>
+</div>
+<!-- KPI 2 -->
+<div class="flex gap-8">
+<div class="flex-1">
+<div class="kpi-number text-accent">52<span class="text-3xl text-white font-normal ml-1">%</span></div>
+<div class="flex items-center gap-2 text-white text-opacity-90">
+<i class="fa-solid fa-earth-asia"></i>
+<p class="font-medium">중화권 비중</p>
+</div>
+<p class="text-sm text-white text-opacity-60 mt-1">중국 / 대만 / 홍콩</p>
+</div>
+<!-- KPI 3 -->
+<div class="flex-1">
+<div class="kpi-number text-accent">32<span class="text-3xl text-white font-normal ml-1">%</span></div>
+<div class="flex items-center gap-2 text-white text-opacity-90">
+<i class="fa-solid fa-arrow-trend-up"></i>
+<p class="font-medium">연간 성장률</p>
+</div>
+<p class="text-sm text-white text-opacity-60 mt-1">의료관광 섹터</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Panel: Hospital Challenges -->
+<div class="right-panel">
+<div class="mb-8">
+<p><span class="section-tag bg-gray-200 text-gray-600">Pain Points</span></p>
+<h2 class="text-3xl font-bold text-gray-900">하지만 병원의 현실은<br/><span class="text-primary">4가지 장벽</span>에 막혀있습니다</h2>
+</div>
+<div class="grid grid-cols-2 gap-6 h-full">
+<!-- Challenge 1 -->
+<div class="pain-point-card">
+<div class="w-12 h-12 rounded-lg bg-gray-100 flex items-center justify-center mb-4 text-gray-600 text-xl">
+<i class="fa-solid fa-comments"></i>
+</div>
+<h3 class="text-xl font-bold text-gray-800 mb-2">외국어 장벽</h3>
+<p class="text-gray-500 leading-relaxed text-sm flex-grow">
+                            전문 통역 코디네이터 채용 비용 부담과 소통의 어려움으로 인한 예약 손실 발생
+                        </p>
+</div>
+<!-- Challenge 2 -->
+<div class="pain-point-card">
+<div class="w-12 h-12 rounded-lg bg-gray-100 flex items-center justify-center mb-4 text-gray-600 text-xl">
+<i class="fa-solid fa-sack-dollar"></i>
+</div>
+<h3 class="text-xl font-bold text-gray-800 mb-2">마케팅 비용</h3>
+<p class="text-gray-500 leading-relaxed text-sm flex-grow">
+                            해외 마케팅 채널 확보의 어려움과 불확실한 ROI, 높은 광고 집행 비용
+                        </p>
+</div>
+<!-- Challenge 3 -->
+<div class="pain-point-card">
+<div class="w-12 h-12 rounded-lg bg-gray-100 flex items-center justify-center mb-4 text-gray-600 text-xl">
+<i class="fa-solid fa-calendar-xmark"></i>
+</div>
+<h3 class="text-xl font-bold text-gray-800 mb-2">예약 관리 비효율</h3>
+<p class="text-gray-500 leading-relaxed text-sm flex-grow">
+                            여러 채널(SNS, 메신저 등)로 분산된 예약 문의로 인한 관리 복잡성 및 노쇼 증가
+                        </p>
+</div>
+<!-- Challenge 4 -->
+<div class="pain-point-card">
+<div class="w-12 h-12 rounded-lg bg-gray-100 flex items-center justify-center mb-4 text-gray-600 text-xl">
+<i class="fa-solid fa-calculator"></i>
+</div>
+<h3 class="text-xl font-bold text-gray-800 mb-2">정산 수작업</h3>
+<p class="text-gray-500 leading-relaxed text-sm flex-grow">
+                            환율 계산, 수수료 정산, 매출 집계 등을 엑셀 등으로 수기 관리하는 번거로움
+                        </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

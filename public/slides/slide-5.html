@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=1280, height=720, initial-scale=1.0" name="viewport"/>
+<title>예약 플로우 (6단계)</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f3f4f6;
+            font-family: 'Noto Sans KR', sans-serif;
+            overflow: hidden;
+        }
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            position: relative;
+            background-color: #ffffff;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+<div class="slide-container">
+<!-- Background Decor -->
+<!-- Replaced gradient with solid color for export compatibility -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 0; top: 0; width: 1280px; height: 10px; background-color: #6100FF; z-index: 1;"></div>
+<div data-object="true" data-object-type="shape" style="position: absolute; left: -100px; top: 200px; width: 400px; height: 400px; background-color: rgba(97, 0, 255, 0.02); border-radius: 50%; z-index: 0;"></div>
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 1000px; top: -100px; width: 400px; height: 400px; background-color: rgba(236, 72, 153, 0.02); border-radius: 50%; z-index: 0;"></div>
+<!-- Header -->
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 60px; top: 60px; width: 600px; height: 100px; z-index: 10;">
+<p style="margin: 0; font-size: 18px; font-weight: 600; color: #EC4899; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px;">End-to-End Process</p>
+<h1 style="margin: 0; font-size: 42px; font-weight: 800; color: #111827; letter-spacing: -0.02em;">예약 플로우</h1>
+<p style="margin: 10px 0 0 0; font-size: 20px; font-weight: 400; color: #6b7280;">환자 예약부터 병원 정산까지 원스톱으로 연결됩니다</p>
+</div>
+<!-- Timeline Connector Line -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 130px; top: 335px; width: 950px; height: 4px; background-color: #E5E7EB; z-index: 1;"></div>
+<!-- Replaced gradient with solid color with opacity -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 130px; top: 335px; width: 950px; height: 4px; background-color: #6100FF; opacity: 0.3; z-index: 2;"></div>
+<!-- Step 1: 시술 선택 -->
+<!-- Circle Background -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 100px; top: 300px; width: 74px; height: 74px; background-color: #FFFFFF; border: 3px solid #6100FF; border-radius: 50%;  z-index: 5;"></div>
+<!-- Number Badge -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 100px; top: 290px; width: 26px; height: 26px; background-color: #6100FF; border-radius: 50%; z-index: 6; display: flex; align-items: center; justify-content: center;"></div>
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 100px; top: 290px; width: 26px; height: 26px; z-index: 7; text-align: center;">
+<p style="margin: 0; font-size: 14px; font-weight: 700; color: #FFFFFF; line-height: 26px;">1</p>
+</div>
+<!-- Icon (Centered using Flexbox) -->
+<div class="flex justify-center items-center" data-object="true" data-object-type="icon" style="position: absolute; left: 100px; top: 300px; width: 74px; height: 74px; color: #6100FF; font-size: 28px; z-index: 10;">
+<i class="fa-solid fa-magnifying-glass"></i>
+</div>
+<!-- Text -->
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 70px; top: 390px; width: 134px; height: 60px; z-index: 10; text-align: center;">
+<p style="margin: 0; font-size: 18px; font-weight: 700; color: #1F2937; margin-bottom: 6px;">시술 선택</p>
+<p style="margin: 0; font-size: 14px; font-weight: 400; color: #6B7280; line-height: 1.4;">환자가 앱에서<br/>시술 검색 및 선택</p>
+</div>
+<!-- Step 2: 보증금 결제 (Accent) -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 290px; top: 300px; width: 74px; height: 74px; background-color: #FFFFFF; border: 3px solid #EC4899; border-radius: 50%;  z-index: 5;"></div>
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 290px; top: 290px; width: 26px; height: 26px; background-color: #EC4899; border-radius: 50%; z-index: 6;"></div>
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 290px; top: 290px; width: 26px; height: 26px; z-index: 7; text-align: center;">
+<p style="margin: 0; font-size: 14px; font-weight: 700; color: #FFFFFF; line-height: 26px;">2</p>
+</div>
+<!-- Icon (Centered) -->
+<div class="flex justify-center items-center" data-object="true" data-object-type="icon" style="position: absolute; left: 290px; top: 300px; width: 74px; height: 74px; color: #EC4899; font-size: 28px; z-index: 10;">
+<i class="fa-solid fa-credit-card"></i>
+</div>
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 260px; top: 390px; width: 134px; height: 60px; z-index: 10; text-align: center;">
+<p style="margin: 0; font-size: 18px; font-weight: 700; color: #1F2937; margin-bottom: 6px;">보증금 결제</p>
+<p style="margin: 0; font-size: 14px; font-weight: 400; color: #6B7280; line-height: 1.4;">시술가 15%<br/>앱 내 선결제</p>
+</div>
+<!-- Step 3: 예약 확인 -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 480px; top: 300px; width: 74px; height: 74px; background-color: #FFFFFF; border: 3px solid #6100FF; border-radius: 50%;  z-index: 5;"></div>
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 480px; top: 290px; width: 26px; height: 26px; background-color: #6100FF; border-radius: 50%; z-index: 6;"></div>
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 480px; top: 290px; width: 26px; height: 26px; z-index: 7; text-align: center;">
+<p style="margin: 0; font-size: 14px; font-weight: 700; color: #FFFFFF; line-height: 26px;">3</p>
+</div>
+<!-- Icon (Centered) -->
+<div class="flex justify-center items-center" data-object="true" data-object-type="icon" style="position: absolute; left: 480px; top: 300px; width: 74px; height: 74px; color: #6100FF; font-size: 28px; z-index: 10;">
+<i class="fa-regular fa-calendar-check"></i>
+</div>
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 450px; top: 390px; width: 134px; height: 60px; z-index: 10; text-align: center;">
+<p style="margin: 0; font-size: 18px; font-weight: 700; color: #1F2937; margin-bottom: 6px;">예약 확인</p>
+<p style="margin: 0; font-size: 14px; font-weight: 400; color: #6B7280; line-height: 1.4;">병원 관리자<br/>예약 일정 승인</p>
+</div>
+<!-- Step 4: AI 채팅 상담 -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 670px; top: 300px; width: 74px; height: 74px; background-color: #FFFFFF; border: 3px solid #6100FF; border-radius: 50%;  z-index: 5;"></div>
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 670px; top: 290px; width: 26px; height: 26px; background-color: #6100FF; border-radius: 50%; z-index: 6;"></div>
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 670px; top: 290px; width: 26px; height: 26px; z-index: 7; text-align: center;">
+<p style="margin: 0; font-size: 14px; font-weight: 700; color: #FFFFFF; line-height: 26px;">4</p>
+</div>
+<!-- Icon (Centered) -->
+<div class="flex justify-center items-center" data-object="true" data-object-type="icon" style="position: absolute; left: 670px; top: 300px; width: 74px; height: 74px; color: #6100FF; font-size: 28px; z-index: 10;">
+<i class="fa-solid fa-comments"></i>
+</div>
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 640px; top: 390px; width: 134px; height: 60px; z-index: 10; text-align: center;">
+<p style="margin: 0; font-size: 18px; font-weight: 700; color: #1F2937; margin-bottom: 6px;">AI 채팅 상담</p>
+<p style="margin: 0; font-size: 14px; font-weight: 400; color: #6B7280; line-height: 1.4;">자동번역으로<br/>사전 상세 상담</p>
+</div>
+<!-- Step 5: 시술 완료 -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 860px; top: 300px; width: 74px; height: 74px; background-color: #FFFFFF; border: 3px solid #6100FF; border-radius: 50%;  z-index: 5;"></div>
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 860px; top: 290px; width: 26px; height: 26px; background-color: #6100FF; border-radius: 50%; z-index: 6;"></div>
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 860px; top: 290px; width: 26px; height: 26px; z-index: 7; text-align: center;">
+<p style="margin: 0; font-size: 14px; font-weight: 700; color: #FFFFFF; line-height: 26px;">5</p>
+</div>
+<!-- Icon (Centered) -->
+<div class="flex justify-center items-center" data-object="true" data-object-type="icon" style="position: absolute; left: 860px; top: 300px; width: 74px; height: 74px; color: #6100FF; font-size: 28px; z-index: 10;">
+<i class="fa-solid fa-house-medical"></i>
+</div>
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 830px; top: 390px; width: 134px; height: 60px; z-index: 10; text-align: center;">
+<p style="margin: 0; font-size: 18px; font-weight: 700; color: #1F2937; margin-bottom: 6px;">시술 완료</p>
+<p style="margin: 0; font-size: 14px; font-weight: 400; color: #6B7280; line-height: 1.4;">환자 병원 방문 및<br/>잔금 현장 결제</p>
+</div>
+<!-- Step 6: 자동 정산 (Accent) -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 1050px; top: 300px; width: 74px; height: 74px; background-color: #FFFFFF; border: 3px solid #EC4899; border-radius: 50%;  z-index: 5;"></div>
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 1050px; top: 290px; width: 26px; height: 26px; background-color: #EC4899; border-radius: 50%; z-index: 6;"></div>
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 1050px; top: 290px; width: 26px; height: 26px; z-index: 7; text-align: center;">
+<p style="margin: 0; font-size: 14px; font-weight: 700; color: #FFFFFF; line-height: 26px;">6</p>
+</div>
+<!-- Icon (Centered) -->
+<div class="flex justify-center items-center" data-object="true" data-object-type="icon" style="position: absolute; left: 1050px; top: 300px; width: 74px; height: 74px; color: #EC4899; font-size: 28px; z-index: 10;">
+<i class="fa-solid fa-file-invoice-dollar"></i>
+</div>
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 1020px; top: 390px; width: 134px; height: 60px; z-index: 10; text-align: center;">
+<p style="margin: 0; font-size: 18px; font-weight: 700; color: #1F2937; margin-bottom: 6px;">자동 정산</p>
+<p style="margin: 0; font-size: 14px; font-weight: 400; color: #6B7280; line-height: 1.4;">월별 자동 정산 및<br/>PDF 리포트 발행</p>
+</div>
+<!-- Bottom Info Box -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 60px; top: 540px; width: 1160px; height: 100px; background-color: #F9FAFB; border-radius: 16px; z-index: 1;"></div>
+<div class="flex justify-center items-center" data-object="true" data-object-type="icon" style="position: absolute; left: 100px; top: 540px; width: 30px; height: 100px; color: #6100FF; font-size: 24px; z-index: 10;">
+<i class="fa-solid fa-circle-info"></i>
+</div>
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 150px; top: 565px; width: 1000px; height: 60px; z-index: 10;">
+<p style="margin: 0; font-size: 16px; font-weight: 400; color: #4B5563; line-height: 1.6;">
+<strong style="color: #6100FF;">Key Point:</strong> 병원은 환자의 보증금 결제 시점에 예약 확정을 진행하며, 잔금은 환자가 병원에 방문하여 직접 결제합니다. <br/>
+                플랫폼 수수료는 월별 정산 시 보증금에서 자동 차감되므로, <span style="text-decoration: underline;">병원이 별도로 수수료를 입금하는 번거로움이 없습니다.</span>
+</p>
+</div>
+</div>
+</body>
+</html>

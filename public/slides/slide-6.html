@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=1280, height=720, initial-scale=1.0" name="viewport"/>
+<title>병원 제공 기능 (1) - 예약 관리 &amp; 실시간 대시보드</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #F3F4F6;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            position: relative;
+            background-color: #FFFFFF;
+            overflow: hidden;
+        }
+        p {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="slide-container">
+<!-- Background Decor -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 0; top: 0; width: 1280px; height: 10px; background: #6100FF; z-index: 1;"></div>
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 600px; top: -200px; width: 800px; height: 800px; background-color: rgba(97, 0, 255, 0.03); border-radius: 50%; z-index: 0;"></div>
+<!-- Left Side: Dashboard Mockup -->
+<!-- Device Frame -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 60px; top: 136px; width: 620px; height: 480px; background-color: #ffffff; border-radius: 16px;  z-index: 2;"></div>
+<!-- Mockup Header -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 61px; top: 137px; width: 618px; height: 50px; background-color: #F9FAFB; border-top-left-radius: 16px; border-top-right-radius: 16px; border-bottom: 1px solid #E5E7EB; z-index: 3;"></div>
+<div data-object="true" data-object-type="icon" style="position: absolute; left: 85px; top: 151px; width: 20px; height: 20px; color: #6100FF; font-size: 18px; z-index: 10;">
+<i class="fa-solid fa-bars"></i>
+</div>
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 120px; top: 151px; width: 150px; height: 30px; z-index: 10;">
+<p style="font-size: 14px; font-weight: 700; color: #374151;">BeautyPass Admin</p>
+</div>
+<div data-object="true" data-object-type="icon" style="position: absolute; left: 620px; top: 151px; width: 30px; height: 30px; color: #9CA3AF; font-size: 18px; z-index: 10;">
+<i class="fa-solid fa-user-circle"></i>
+</div>
+<!-- Mockup Sidebar -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 61px; top: 187px; width: 60px; height: 428px; background-color: #FFFFFF; border-right: 1px solid #E5E7EB; border-bottom-left-radius: 16px; z-index: 3;"></div>
+<div data-object="true" data-object-type="icon" style="position: absolute; left: 80px; top: 206px; width: 24px; height: 24px; color: #6100FF; font-size: 18px; z-index: 10;">
+<i class="fa-solid fa-chart-pie"></i>
+</div>
+<div data-object="true" data-object-type="icon" style="position: absolute; left: 80px; top: 256px; width: 24px; height: 24px; color: #9CA3AF; font-size: 18px; z-index: 10;">
+<i class="fa-regular fa-calendar"></i>
+</div>
+<div data-object="true" data-object-type="icon" style="position: absolute; left: 80px; top: 306px; width: 24px; height: 24px; color: #9CA3AF; font-size: 18px; z-index: 10;">
+<i class="fa-regular fa-comments"></i>
+</div>
+<!-- Mockup Content Area -->
+<!-- Stat Cards -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 140px; top: 206px; width: 160px; height: 80px; background-color: #F3E8FF; border-radius: 8px; z-index: 4;"></div>
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 155px; top: 221px; width: 130px; height: 50px; z-index: 10;">
+<p style="font-size: 12px; color: #6B7280; margin-bottom: 4px;">오늘 예약</p>
+<p style="font-size: 24px; font-weight: 700; color: #6100FF;">12<span style="font-size: 14px; font-weight: 500; margin-left: 4px;">건</span></p>
+</div>
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 315px; top: 206px; width: 160px; height: 80px; background-color: #FDF2F8; border-radius: 8px; z-index: 4;"></div>
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 330px; top: 221px; width: 130px; height: 50px; z-index: 10;">
+<p style="font-size: 12px; color: #6B7280; margin-bottom: 4px;">이번 달 매출</p>
+<p style="font-size: 24px; font-weight: 700; color: #EC4899;">45.2<span style="font-size: 14px; font-weight: 500; margin-left: 4px;">M</span></p>
+</div>
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 490px; top: 206px; width: 160px; height: 80px; background-color: #F3F4F6; border-radius: 8px; z-index: 4;"></div>
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 505px; top: 221px; width: 130px; height: 50px; z-index: 10;">
+<p style="font-size: 12px; color: #6B7280; margin-bottom: 4px;">대기 상담</p>
+<p style="font-size: 24px; font-weight: 700; color: #374151;">3<span style="font-size: 14px; font-weight: 500; margin-left: 4px;">명</span></p>
+</div>
+<!-- Chart 1: Revenue Trend -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 140px; top: 306px; width: 335px; height: 200px; background-color: #FFFFFF; border-radius: 8px; z-index: 4;"></div>
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 155px; top: 321px; width: 200px; height: 20px; z-index: 10;">
+<p style="font-size: 12px; font-weight: 700; color: #374151;">주간 예약 추이</p>
+</div>
+<div data-object="true" data-object-type="chart" style="position: absolute; left: 155px; top: 346px; width: 300px; height: 140px; z-index: 10;">
+<canvas id="revenueChart"></canvas>
+</div>
+<!-- Chart 2: Source -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 490px; top: 306px; width: 160px; height: 200px; background-color: #FFFFFF; border-radius: 8px; z-index: 4;"></div>
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 505px; top: 321px; width: 130px; height: 20px; z-index: 10;">
+<p style="font-size: 12px; font-weight: 700; color: #374151;">국가별 비중</p>
+</div>
+<div data-object="true" data-object-type="chart" style="position: absolute; left: 500px; top: 356px; width: 140px; height: 140px; z-index: 10;">
+<canvas id="sourceChart"></canvas>
+</div>
+<!-- Decoration Elements for Mockup -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 40px; top: 116px; width: 80px; height: 80px; background-color: #EC4899; border-radius: 50%; opacity: 0.1; z-index: 1;"></div>
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 650px; top: 566px; width: 60px; height: 60px; background-color: #6100FF; border-radius: 50%; opacity: 0.1; z-index: 1;"></div>
+<!-- Right Side: Content -->
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 740px; top: 80px; width: 480px; height: 100px; z-index: 10;">
+<p style="font-size: 16px; font-weight: 600; color: #6100FF; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.05em;">병원 제공 기능 (1)</p>
+<h1 style="font-size: 36px; font-weight: 800; color: #111827; line-height: 1.2;">예약 관리 &amp;<br/>실시간 대시보드</h1>
+</div>
+<!-- Feature Card 1 -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 740px; top: 220px; width: 480px; height: 120px; background-color: #FFFFFF; border-radius: 12px;  z-index: 5;"></div>
+<div data-object="true" data-object-type="icon" style="position: absolute; left: 770px; top: 250px; width: 40px; height: 40px; background-color: #F3E8FF; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #6100FF; font-size: 20px; z-index: 10;">
+<i class="fa-solid fa-chart-line"></i>
+</div>
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 830px; top: 245px; width: 360px; height: 70px; z-index: 10;">
+<p style="font-size: 18px; font-weight: 700; color: #1F2937; margin-bottom: 6px;">실시간 데이터 시각화</p>
+<p style="font-size: 14px; font-weight: 400; color: #6B7280; line-height: 1.5;">오늘/이번달 예약 현황, 매출 추이, 전월 대비 증감률을 직관적인 그래프로 한눈에 파악하세요.</p>
+</div>
+<!-- Feature Card 2 -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 740px; top: 360px; width: 480px; height: 120px; background-color: #FFFFFF; border-radius: 12px;  z-index: 5;"></div>
+<div data-object="true" data-object-type="icon" style="position: absolute; left: 770px; top: 390px; width: 40px; height: 40px; background-color: #FDF2F8; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #EC4899; font-size: 20px; z-index: 10;">
+<i class="fa-regular fa-calendar-check"></i>
+</div>
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 830px; top: 385px; width: 360px; height: 70px; z-index: 10;">
+<p style="font-size: 18px; font-weight: 700; color: #1F2937; margin-bottom: 6px;">스마트 예약 관리</p>
+<p style="font-size: 14px; font-weight: 400; color: #6B7280; line-height: 1.5;">테이블 및 캘린더 뷰를 지원하며, 예약 승인/취소/리스케줄링을 클릭 한 번으로 간편하게 처리합니다.</p>
+</div>
+<!-- Feature Card 3 -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 740px; top: 500px; width: 480px; height: 120px; background-color: #FFFFFF; border-radius: 12px;  z-index: 5;"></div>
+<div data-object="true" data-object-type="icon" style="position: absolute; left: 770px; top: 530px; width: 40px; height: 40px; background-color: #EFF6FF; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #3B82F6; font-size: 20px; z-index: 10;">
+<i class="fa-solid fa-file-medical"></i>
+</div>
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 830px; top: 525px; width: 360px; height: 70px; z-index: 10;">
+<p style="font-size: 18px; font-weight: 700; color: #1F2937; margin-bottom: 6px;">환자 사전 정보 수집</p>
+<p style="font-size: 14px; font-weight: 400; color: #6B7280; line-height: 1.5;">환자의 Beauty Goal, 피부 타입(RSTI), 방한 일정 등 진료에 필요한 핵심 정보를 미리 제공합니다.</p>
+</div>
+<!-- Chart Configuration -->
+<script>
+            // Revenue Chart
+            const ctx1 = document.getElementById('revenueChart').getContext('2d');
+            new Chart(ctx1, {
+                type: 'line',
+                data: {
+                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                    datasets: [{
+                        label: '예약',
+                        data: [12, 19, 15, 25, 22, 30, 28],
+                        borderColor: '#6100FF',
+                        backgroundColor: 'rgba(97, 0, 255, 0.1)',
+                        borderWidth: 2,
+                        tension: 0.4,
+                        fill: true,
+                        pointRadius: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { display: false },
+                        y: { display: false }
+                    },
+                    animation: false
+                }
+            });
+
+            // Source Chart
+            const ctx2 = document.getElementById('sourceChart').getContext('2d');
+            new Chart(ctx2, {
+                type: 'doughnut',
+                data: {
+                    labels: ['중국', '일본', '기타'],
+                    datasets: [{
+                        data: [55, 30, 15],
+                        backgroundColor: ['#EC4899', '#6100FF', '#E5E7EB'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '70%',
+                    plugins: { legend: { display: false } },
+                    animation: false
+                }
+            });
+        </script>
+</div>
+</body>
+</html>

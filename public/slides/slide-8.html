@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=1280, height=720, initial-scale=1.0" name="viewport"/>
+<title>병원 제공 기능 (3) - 상품 &amp; 시술 관리</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #F3F4F6;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            position: relative;
+            background-color: #FFFFFF;
+            overflow: hidden;
+        }
+        p {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="slide-container">
+<!-- Background Decor -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 0; top: 0; width: 1280px; height: 10px; background: #6100FF; z-index: 1;"></div>
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 1000px; top: 0px; width: 280px; height: 280px; background-color: rgba(236, 72, 153, 0.03); border-radius: 50%; z-index: 0;"></div>
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 0px; top: 550px; width: 170px; height: 170px; background-color: rgba(97, 0, 255, 0.03); border-radius: 50%; z-index: 0;"></div>
+<!-- Header -->
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 60px; top: 60px; width: 800px; height: 140px; z-index: 10;">
+<p style="margin: 0; font-size: 16px; font-weight: 600; color: #6100FF; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.05em;">병원 제공 기능 (3)</p>
+<h1 style="margin: 0; font-size: 42px; font-weight: 800; color: #111827; letter-spacing: -0.02em;">상품 &amp; 시술 관리</h1>
+<p style="margin: 10px 0 0 0; font-size: 20px; font-weight: 400; color: #6b7280;">복잡한 설정 없이 간편하게 등록하고, 자동으로 번역되어 전 세계에 노출됩니다</p>
+</div>
+<!-- Card Grid Layout -->
+<!-- Card 1: 시술 카테고리별 상품 등록 -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 60px; top: 200px; width: 370px; height: 210px; background-color: #FFFFFF; border-radius: 16px;  z-index: 2;"></div>
+<!-- Removed border-top color line as requested -->
+<div data-object="true" data-object-type="icon" style="position: absolute; left: 90px; top: 235px; width: 48px; height: 48px; background-color: #F3E8FF; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #6100FF; font-size: 24px; z-index: 10;">
+<i class="fa-solid fa-layer-group"></i>
+</div>
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 155px; top: 235px; width: 245px; height: 48px; z-index: 10;">
+<p style="margin: 0; font-size: 20px; font-weight: 700; color: #1F2937; line-height: 48px;">간편한 상품 등록</p>
+</div>
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 90px; top: 300px; width: 310px; height: 100px; z-index: 10;">
+<p style="margin: 0; font-size: 15px; font-weight: 400; color: #4B5563; line-height: 1.6;">시술 카테고리, 가격, 이미지, 설명 등을 직관적인 UI로 손쉽게 등록하세요. 복잡한 코딩이나 설정이 필요 없습니다.</p>
+</div>
+<!-- Card 2: 상품 활성/비활성 토글 -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 455px; top: 200px; width: 370px; height: 210px; background-color: #FFFFFF; border-radius: 16px;  z-index: 2;"></div>
+<!-- Removed border-top color line as requested -->
+<div data-object="true" data-object-type="icon" style="position: absolute; left: 485px; top: 235px; width: 48px; height: 48px; background-color: #FDF2F8; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #EC4899; font-size: 24px; z-index: 10;">
+<i class="fa-solid fa-toggle-on"></i>
+</div>
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 550px; top: 235px; width: 245px; height: 48px; z-index: 10;">
+<p style="margin: 0; font-size: 20px; font-weight: 700; color: #1F2937; line-height: 48px;">원클릭 운영 관리</p>
+</div>
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 485px; top: 300px; width: 310px; height: 100px; z-index: 10;">
+<p style="margin: 0; font-size: 15px; font-weight: 400; color: #4B5563; line-height: 1.6;">시술 가능 여부에 따라 상품 노출을 즉시 변경하세요. 시즌별 프로모션이나 예약 마감 시 유연하게 대처할 수 있습니다.</p>
+</div>
+<!-- Card 3: 의료진 프로필 관리 -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 850px; top: 200px; width: 370px; height: 210px; background-color: #FFFFFF; border-radius: 16px;  z-index: 2;"></div>
+<!-- Removed border-top color line as requested -->
+<div data-object="true" data-object-type="icon" style="position: absolute; left: 880px; top: 235px; width: 48px; height: 48px; background-color: #EFF6FF; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #3B82F6; font-size: 24px; z-index: 10;">
+<i class="fa-solid fa-user-doctor"></i>
+</div>
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 945px; top: 235px; width: 245px; height: 48px; z-index: 10;">
+<p style="margin: 0; font-size: 20px; font-weight: 700; color: #1F2937; line-height: 48px;">신뢰도 향상 프로필</p>
+</div>
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 880px; top: 300px; width: 310px; height: 100px; z-index: 10;">
+<p style="margin: 0; font-size: 15px; font-weight: 400; color: #4B5563; line-height: 1.6;">의료진의 전문의 자격, 경력, 사진을 상세히 등록하여 외국인 환자들에게 전문성과 신뢰감을 전달합니다.</p>
+</div>
+<!-- Card 4: 다국어 자동 변환 -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 60px; top: 440px; width: 370px; height: 210px; background-color: #FFFFFF; border-radius: 16px;  z-index: 2;"></div>
+<!-- Removed border-top color line as requested -->
+<div data-object="true" data-object-type="icon" style="position: absolute; left: 90px; top: 475px; width: 48px; height: 48px; background-color: #F5F3FF; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #8B5CF6; font-size: 24px; z-index: 10;">
+<i class="fa-solid fa-globe"></i>
+</div>
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 155px; top: 475px; width: 245px; height: 48px; z-index: 10;">
+<p style="margin: 0; font-size: 20px; font-weight: 700; color: #1F2937; line-height: 48px;">다국어 자동 변환</p>
+</div>
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 90px; top: 540px; width: 310px; height: 100px; z-index: 10;">
+<p style="margin: 0; font-size: 15px; font-weight: 400; color: #4B5563; line-height: 1.6;">한국어로 입력하면 영어, 중국어, 일본어로 자동 번역되어 등록됩니다. 번역 비용과 시간을 획기적으로 절약하세요.</p>
+</div>
+<!-- Card 5: 문진 템플릿 관리 -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 455px; top: 440px; width: 370px; height: 210px; background-color: #FFFFFF; border-radius: 16px;  z-index: 2;"></div>
+<!-- Removed border-top color line as requested -->
+<div data-object="true" data-object-type="icon" style="position: absolute; left: 485px; top: 475px; width: 48px; height: 48px; background-color: #ECFDF5; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #10B981; font-size: 24px; z-index: 10;">
+<i class="fa-solid fa-clipboard-list"></i>
+</div>
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 550px; top: 475px; width: 245px; height: 48px; z-index: 10;">
+<p style="margin: 0; font-size: 20px; font-weight: 700; color: #1F2937; line-height: 48px;">커스텀 문진표</p>
+</div>
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 485px; top: 540px; width: 310px; height: 100px; z-index: 10;">
+<p style="margin: 0; font-size: 15px; font-weight: 400; color: #4B5563; line-height: 1.6;">플랫폼 기본 문진표에 병원만의 특화 질문을 추가할 수 있습니다. 2계층 구조로 체계적인 사전 정보 수집이 가능합니다.</p>
+</div>
+<!-- Card 6: 사후관리 알림 설정 -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 850px; top: 440px; width: 370px; height: 210px; background-color: #FFFFFF; border-radius: 16px;  z-index: 2;"></div>
+<!-- Removed border-top color line as requested -->
+<div data-object="true" data-object-type="icon" style="position: absolute; left: 880px; top: 475px; width: 48px; height: 48px; background-color: #FFFBEB; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #F59E0B; font-size: 24px; z-index: 10;">
+<i class="fa-regular fa-bell"></i>
+</div>
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 945px; top: 475px; width: 245px; height: 48px; z-index: 10;">
+<p style="margin: 0; font-size: 20px; font-weight: 700; color: #1F2937; line-height: 48px;">자동 사후관리</p>
+</div>
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 880px; top: 540px; width: 310px; height: 100px; z-index: 10;">
+<p style="margin: 0; font-size: 15px; font-weight: 400; color: #4B5563; line-height: 1.6;">시술 후 D+1, D+7 등 자동 알림을 설정하여 환자의 회복 상태를 체크하고 재방문을 유도합니다.</p>
+</div>
+</div>
+</body>
+</html>

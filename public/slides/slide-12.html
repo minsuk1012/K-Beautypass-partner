@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=1280, height=720, initial-scale=1.0" name="viewport"/>
+<title>수익 시뮬레이션</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #F3F4F6;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            position: relative;
+            background-color: #FFFFFF;
+            overflow: hidden;
+        }
+        p {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="slide-container">
+<!-- Background Decor -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 0; top: 0; width: 1280px; height: 10px; background: #6100FF; z-index: 1;"></div>
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 800px; top: -100px; width: 600px; height: 600px; background-color: rgba(97, 0, 255, 0.03); border-radius: 50%; z-index: 0;"></div>
+<div data-object="true" data-object-type="shape" style="position: absolute; left: -100px; top: 400px; width: 400px; height: 400px; background-color: rgba(236, 72, 153, 0.03); border-radius: 50%; z-index: 0;"></div>
+<!-- Header -->
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 60px; top: 60px; width: 800px; height: 120px; z-index: 10;">
+<p style="margin: 0; font-size: 16px; font-weight: 600; color: #6100FF; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.05em;">예상 수익 분석</p>
+<h1 style="margin: 0; font-size: 42px; font-weight: 800; color: #111827; letter-spacing: -0.02em;">수익 시뮬레이션</h1>
+<p style="margin: 10px 0 0 0; font-size: 20px; font-weight: 400; color: #6b7280;">월 10건 예약만으로도 기대할 수 있는 수익을 확인하세요</p>
+</div>
+<!-- Left Side: Calculation Flow -->
+<!-- Step 1: Total Revenue -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 60px; top: 200px; width: 500px; height: 120px; background-color: #FFFFFF; border-radius: 16px;  z-index: 2;"></div>
+<div data-object="true" data-object-type="icon" style="position: absolute; left: 90px; top: 235px; width: 50px; height: 50px; background-color: #F3F4F6; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #374151; font-size: 24px; z-index: 10;">
+<i class="fa-solid fa-coins"></i>
+</div>
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 160px; top: 230px; width: 380px; height: 60px; z-index: 10;">
+<p style="margin: 0; font-size: 14px; font-weight: 500; color: #6B7280; margin-bottom: 4px;">총 매출 (월 10건 x 평균 30만원)</p>
+<p style="margin: 0; font-size: 32px; font-weight: 800; color: #111827;">3,000,000 <span style="font-size: 20px; font-weight: 600;">원</span></p>
+</div>
+<!-- Connector: Minus -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 309px; top: 320px; width: 2px; height: 60px; background-color: #E5E7EB; z-index: 1;"></div>
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 290px; top: 330px; width: 40px; height: 40px; background-color: #FDF2F8; border-radius: 50%; z-index: 2;"></div>
+<div data-object="true" data-object-type="icon" style="position: absolute; left: 300px; top: 340px; width: 20px; height: 20px; color: #EC4899; font-size: 20px; z-index: 10;">
+<i class="fa-solid fa-minus"></i>
+</div>
+<!-- Step 2: Platform Fee -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 60px; top: 380px; width: 500px; height: 100px; background-color: #FDF2F8; border-radius: 16px; z-index: 2;"></div>
+<div data-object="true" data-object-type="icon" style="position: absolute; left: 90px; top: 405px; width: 50px; height: 50px; background-color: #FFFFFF; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #EC4899; font-size: 24px; z-index: 10;">
+<i class="fa-solid fa-percent"></i>
+</div>
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 160px; top: 400px; width: 380px; height: 60px; z-index: 10;">
+<p style="margin: 0; font-size: 14px; font-weight: 500; color: #BE185D; margin-bottom: 4px;">플랫폼 수수료 (15%)</p>
+<p style="margin: 0; font-size: 28px; font-weight: 700; color: #9D174D;">450,000 <span style="font-size: 18px; font-weight: 600;">원</span></p>
+</div>
+<!-- Connector: Equals -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 309px; top: 480px; width: 2px; height: 60px; background-color: #E5E7EB; z-index: 1;"></div>
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 290px; top: 490px; width: 40px; height: 40px; background-color: #F3E8FF; border-radius: 50%; z-index: 2;"></div>
+<div data-object="true" data-object-type="icon" style="position: absolute; left: 300px; top: 500px; width: 20px; height: 20px; color: #6100FF; font-size: 20px; z-index: 10;">
+<i class="fa-solid fa-equals"></i>
+</div>
+<!-- Step 3: Final Profit -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 60px; top: 540px; width: 500px; height: 140px; background: linear-gradient(135deg, #6100FF, #7C3AED); border-radius: 16px;  z-index: 2;"></div>
+<div data-object="true" data-object-type="icon" style="position: absolute; left: 90px; top: 585px; width: 50px; height: 50px; background-color: rgba(255, 255, 255, 0.2); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #FFFFFF; font-size: 24px; z-index: 10;">
+<i class="fa-solid fa-wallet"></i>
+</div>
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 160px; top: 570px; width: 380px; height: 80px; z-index: 10;">
+<p style="margin: 0; font-size: 16px; font-weight: 500; color: #E9D5FF; margin-bottom: 4px;">병원 최종 수령액</p>
+<p style="margin: 0; font-size: 42px; font-weight: 900; color: #FFFFFF; letter-spacing: -0.02em;">2,550,000 <span style="font-size: 24px; font-weight: 600;">원</span></p>
+</div>
+<!-- Right Side: Visualization -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 620px; top: 200px; width: 600px; height: 480px; background-color: #FFFFFF; border-radius: 16px; z-index: 2;"></div>
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 660px; top: 230px; width: 520px; height: 40px; z-index: 10;">
+<p style="margin: 0; font-size: 18px; font-weight: 700; color: #374151;">수익 구조 시각화</p>
+</div>
+<!-- Chart Container -->
+<div data-object="true" data-object-type="chart" style="position: absolute; left: 660px; top: 280px; width: 520px; height: 320px; z-index: 10;">
+<canvas id="roiChart"></canvas>
+</div>
+<!-- Chart Disclaimer -->
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 660px; top: 620px; width: 520px; height: 40px; z-index: 10; text-align: center;">
+<p style="margin: 0; font-size: 14px; font-weight: 400; color: #9CA3AF;">
+<i class="fa-solid fa-circle-check" style="color: #10B981; margin-right: 6px;"></i>
+                수수료 외 <strong style="color: #374151;">입점비, 광고비 등 추가 비용은 0원</strong>입니다.
+            </p>
+</div>
+<script>
+            const ctx = document.getElementById('roiChart').getContext('2d');
+            
+            // Custom plugin to draw values on top of bars
+            const valueLabelPlugin = {
+                id: 'valueLabel',
+                afterDatasetsDraw(chart, args, options) {
+                    const { ctx } = chart;
+                    chart.data.datasets.forEach((dataset, i) => {
+                        const meta = chart.getDatasetMeta(i);
+                        meta.data.forEach((bar, index) => {
+                            const value = dataset.data[index];
+                            if (value > 0) { // Only draw if value exists
+                                const formattedValue = value.toLocaleString() + '원';
+                                ctx.fillStyle = '#374151';
+                                ctx.font = 'bold 14px "Noto Sans KR"';
+                                ctx.textAlign = 'center';
+                                ctx.textBaseline = 'bottom';
+                                ctx.fillText(formattedValue, bar.x, bar.y - 10);
+                            }
+                        });
+                    });
+                }
+            };
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['총 매출', '플랫폼 수수료', '병원 수령액'],
+                    datasets: [{
+                        label: '금액',
+                        data: [3000000, 450000, 2550000],
+                        backgroundColor: [
+                            'rgba(229, 231, 235, 0.5)', // Total: Gray
+                            'rgba(236, 72, 153, 0.8)',  // Fee: Pink
+                            'rgba(97, 0, 255, 1)'       // Profit: Purple (Solid)
+                        ],
+                        borderColor: [
+                            'rgba(156, 163, 175, 1)',
+                            'rgba(236, 72, 153, 1)',
+                            'rgba(97, 0, 255, 1)'
+                        ],
+                        borderWidth: 1,
+                        borderRadius: 8,
+                        barPercentage: 0.6,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.parsed.y.toLocaleString() + '원';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            suggestedMax: 3500000,
+                            grid: {
+                                color: '#F3F4F6',
+                                drawBorder: false,
+                            },
+                            ticks: {
+                                font: { family: "'Noto Sans KR', sans-serif" },
+                                callback: function(value) {
+                                    return value / 10000 + '만';
+                                }
+                            }
+                        },
+                        x: {
+                            grid: { display: false },
+                            ticks: {
+                                font: { 
+                                    family: "'Noto Sans KR', sans-serif",
+                                    size: 14,
+                                    weight: 'bold'
+                                },
+                                color: '#374151'
+                            }
+                        }
+                    },
+                    animation: false
+                },
+                plugins: [valueLabelPlugin]
+            });
+        </script>
+</div>
+</body>
+</html>
