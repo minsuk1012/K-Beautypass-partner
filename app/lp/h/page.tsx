@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
-import { ArrowRight, ArrowDown } from 'lucide-react';
+import { ArrowRight, ArrowDown, Check, MapPin, Search, Star } from 'lucide-react';
 import BrowserFrame from '../../components/BrowserFrame';
 
 /* ─────────── 언어 탭 전환 홈페이지 목업 ─────────── */
@@ -163,7 +163,78 @@ export default function VariantHPage() {
             </motion.div>
           </div>
         </section>
-        {/* SECTION:GOOGLE_GAP */}
+        {/* ═══════════ 인식 전환 — 구글 공백 ═══════════ */}
+        <section className="bg-white">
+          <div className="max-w-5xl mx-auto px-6 py-20 md:py-28">
+            <h2 className="text-3xl md:text-4xl font-black text-slate-900 leading-tight mb-4 text-center">
+              네이버에는 있는데,<br />구글에는 없습니다.
+            </h2>
+            <p className="text-slate-500 text-center max-w-xl mx-auto mb-14">
+              지금까지는 네이버 플레이스로 충분했습니다. 한국 환자에게는요.
+            </p>
+
+            <div className="grid md:grid-cols-2 gap-6 mb-10">
+              {/* 좌: 네이버 — 잘 나옴 */}
+              <div className="bg-slate-50 border border-slate-200 rounded-2xl p-6">
+                <div className="flex items-center gap-2 mb-5">
+                  <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">한국 환자</span>
+                  <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full">
+                    <Check size={11} /> 잘 나옵니다
+                  </span>
+                </div>
+                <div className="bg-white rounded-xl border border-slate-200 p-4 shadow-sm">
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="w-6 h-6 rounded bg-[#03C75A] text-white text-xs font-black flex items-center justify-center">N</span>
+                    <span className="text-xs text-slate-400 font-medium">네이버 플레이스</span>
+                  </div>
+                  <p className="font-bold text-slate-900 mb-1">강남 OO피부과</p>
+                  <div className="flex items-center gap-1.5 text-xs text-slate-500 mb-2">
+                    <Star size={12} className="text-amber-400 fill-amber-400" />
+                    <span className="font-bold text-slate-700">4.8</span>
+                    <span>· 방문자 리뷰 312</span>
+                  </div>
+                  <div className="flex items-center gap-1 text-xs text-slate-400">
+                    <MapPin size={12} /> 서울 강남구 · 피부과
+                  </div>
+                </div>
+                <p className="text-sm text-slate-500 mt-4">한국 환자는 네이버에서 찾습니다.</p>
+              </div>
+
+              {/* 우: 구글 — 우리 병원 없음 */}
+              <div className="bg-red-50/50 border border-red-100 rounded-2xl p-6">
+                <div className="flex items-center gap-2 mb-5">
+                  <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">외국인 환자</span>
+                  <span className="text-[11px] font-bold text-red-600 bg-red-100 px-2 py-0.5 rounded-full">
+                    보이지 않습니다
+                  </span>
+                </div>
+                <div className="bg-white rounded-xl border border-slate-200 p-4 shadow-sm">
+                  <div className="flex items-center gap-2 mb-3 pb-3 border-b border-slate-100">
+                    <Search size={14} className="text-slate-400" />
+                    <span className="text-sm text-slate-700 font-medium">skin clinic gangnam</span>
+                  </div>
+                  <div className="space-y-3">
+                    {['Gangnam A Dermatology Clinic', 'B Skin & Laser Clinic', 'Seoul C Aesthetic Clinic'].map(name => (
+                      <div key={name}>
+                        <p className="text-sm font-medium text-blue-700">{name}</p>
+                        <p className="text-[11px] text-emerald-700">www.{name.split(' ')[0].toLowerCase()}-clinic.com</p>
+                      </div>
+                    ))}
+                    <div className="border-2 border-dashed border-red-200 rounded-lg px-3 py-2.5 text-center">
+                      <p className="text-xs font-bold text-red-400">원장님 병원은 여기에 없습니다</p>
+                    </div>
+                  </div>
+                </div>
+                <p className="text-sm text-slate-500 mt-4">외국인 환자는 구글에서 찾습니다.</p>
+              </div>
+            </div>
+
+            <p className="text-center text-lg md:text-xl font-bold text-slate-900 max-w-2xl mx-auto leading-relaxed">
+              네이버 플레이스는 외국인 환자에게 사실상 보이지 않습니다.<br />
+              <span className="text-red-500">구글에 없는 병원은, 외국인 환자에게는 존재하지 않는 병원입니다.</span>
+            </p>
+          </div>
+        </section>
         {/* SECTION:MARKET */}
         {/* SECTION:BENEFITS */}
         {/* SECTION:WHY_FREE */}
