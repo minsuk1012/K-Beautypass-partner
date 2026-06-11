@@ -239,7 +239,32 @@ export default function VariantHPage() {
             </p>
           </div>
         </section>
-        {/* SECTION:MARKET */}
+        {/* ═══════════ 시장 기회 — 왜 지금 ═══════════ */}
+        <section className="bg-slate-50">
+          <div className="max-w-5xl mx-auto px-6 py-20 md:py-28">
+            <h2 className="text-3xl md:text-4xl font-black text-slate-900 leading-tight mb-14 text-center">
+              외국인 환자, 역대 최대.
+            </h2>
+
+            <div className="grid sm:grid-cols-3 gap-4 mb-8">
+              {[
+                { value: '117만 명', label: '2024년 외국인 환자', sub: '2023년 60.6만 → 약 2배 성장' },
+                { value: '피부과', label: '외국인 환자 진료과 1위', sub: '미용 시술 수요 집중' },
+                { value: '강남·서울', label: '외국인 환자 최다 지역', sub: '주변 병원은 이미 유치 중' },
+              ].map(stat => (
+                <div key={stat.label} className="bg-white rounded-2xl border border-slate-200 p-7 text-center">
+                  <p className="text-3xl md:text-4xl font-black text-emerald-600 mb-2">{stat.value}</p>
+                  <p className="text-sm font-bold text-slate-900 mb-1">{stat.label}</p>
+                  <p className="text-xs text-slate-400">{stat.sub}</p>
+                </div>
+              ))}
+            </div>
+
+            <p className="text-center text-xs text-slate-400">
+              * 출처: 보건복지부·한국보건산업진흥원 외국인 환자 유치 실적
+            </p>
+          </div>
+        </section>
         {/* SECTION:BENEFITS */}
         {/* SECTION:WHY_FREE */}
         {/* SECTION:PROCESS */}
