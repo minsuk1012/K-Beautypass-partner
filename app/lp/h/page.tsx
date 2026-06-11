@@ -3,8 +3,21 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
-import { ArrowRight, ArrowDown, Check, MapPin, Search, Star } from 'lucide-react';
+import { ArrowRight, ArrowDown, Check, MapPin, Search, Star, Globe, Store, Megaphone, Users } from 'lucide-react';
 import BrowserFrame from '../../components/BrowserFrame';
+
+/* ─────────── 가격 앵커 행 ─────────── */
+function PriceRow({ label, old, replacement }: { label: string; old: string; replacement: string }) {
+  return (
+    <div className="flex items-baseline justify-between py-4 border-b border-slate-200/60 last:border-0">
+      <span className="text-slate-600 text-sm sm:text-base">{label}</span>
+      <div className="flex items-baseline gap-4">
+        <span className="text-red-500 line-through text-sm">{old}</span>
+        <span className="font-bold text-emerald-600">{replacement}</span>
+      </div>
+    </div>
+  );
+}
 
 /* ─────────── 언어 탭 전환 홈페이지 목업 ─────────── */
 const SITE_LANGS = [
@@ -265,7 +278,67 @@ export default function VariantHPage() {
             </p>
           </div>
         </section>
-        {/* SECTION:BENEFITS */}
+        {/* ═══════════ 포함 범위 — 0원에 받는 것 전부 ═══════════ */}
+        <section className="bg-white">
+          <div className="max-w-5xl mx-auto px-6 py-20 md:py-28">
+            <h2 className="text-3xl md:text-4xl font-black text-slate-900 leading-tight mb-14 text-center">
+              0원에, 이 모든 것을 받습니다.
+            </h2>
+
+            <div className="grid sm:grid-cols-2 gap-4 mb-16">
+              {[
+                {
+                  icon: Globe,
+                  title: '다국어 홈페이지 제작',
+                  desc: '병원 소개, 시술 안내, 의료진 프로필, 위치, 문의까지. 모바일 반응형 기본.',
+                  tags: ['KR', 'EN', '中', '日'],
+                },
+                {
+                  icon: Store,
+                  title: 'KBP 플랫폼 입점',
+                  desc: '글로벌 유저가 시술을 찾고 예약하는 K-BeautyPass에 병원이 노출됩니다.',
+                  tags: [],
+                },
+                {
+                  icon: Megaphone,
+                  title: '초기 마케팅 지원',
+                  desc: '입점 초기 마케팅 비용은 플랫폼이 부담합니다. 병원이 내는 광고비는 없습니다.',
+                  tags: [],
+                },
+                {
+                  icon: Users,
+                  title: '외국인 체험단 3건 무료',
+                  desc: '입점 병원 대상 외국인 체험단을 3건 무료로 지원합니다.',
+                  tags: [],
+                },
+              ].map(card => (
+                <div key={card.title} className="bg-slate-50 border border-slate-200 rounded-2xl p-7">
+                  <div className="w-11 h-11 rounded-xl bg-emerald-100 flex items-center justify-center mb-4">
+                    <card.icon className="w-5 h-5 text-emerald-600" />
+                  </div>
+                  <div className="flex items-center gap-2 mb-2 flex-wrap">
+                    <h3 className="text-lg font-bold text-slate-900">{card.title}</h3>
+                    {card.tags.map((tag, i) => (
+                      <span key={tag} className={`px-1.5 py-0.5 rounded text-[10px] font-bold ${
+                        ['bg-slate-200 text-slate-600', 'bg-blue-100 text-blue-600', 'bg-amber-100 text-amber-600', 'bg-pink-100 text-pink-600'][i]
+                      }`}>{tag}</span>
+                    ))}
+                  </div>
+                  <p className="text-slate-500 text-sm leading-relaxed">{card.desc}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="max-w-3xl mx-auto">
+              <h3 className="text-xl font-bold text-slate-900 mb-6">일반 제작사와 비교하면</h3>
+              <PriceRow label="홈페이지 제작비" old="300~1,000만원+" replacement="0원" />
+              <PriceRow label="다국어 페이지 추가" old="언어당 별도 견적" replacement="포함" />
+              <PriceRow label="모바일 반응형" old="옵션 별도" replacement="기본 포함" />
+              <PriceRow label="월 유지보수" old="별도" replacement="0원" />
+              <p className="text-xs text-slate-400 mt-4">* 일반 제작사 시세는 보수적 범위 기준입니다.</p>
+            </div>
+          </div>
+        </section>
         {/* SECTION:WHY_FREE */}
         {/* SECTION:PROCESS */}
         {/* SECTION:FAQ */}
