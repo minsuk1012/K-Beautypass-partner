@@ -6,6 +6,64 @@ import Link from 'next/link';
 import { ArrowRight, ArrowDown, Check, MapPin, Search, Star, Globe, Store, Megaphone, Users } from 'lucide-react';
 import BrowserFrame from '../../components/BrowserFrame';
 
+/* ─────────── FAQ ───────────
+ * 주의: Q2/Q3/Q5/Q6/Q7 답변은 스펙(docs/variant-h-free-homepage.md)의 권장안.
+ * 광고 집행 전 "확정 필요 사항" 체크리스트(정책·법률) 통과 필요.
+ */
+const faqs = [
+  {
+    q: '정말 무료인가요? 왜 무료죠?',
+    a: '네, 홈페이지 제작비·입점비·월 이용료 모두 0원입니다. KBP는 예약이 성사될 때만 성과 수수료를 받습니다. 병원이 잘돼야 저희도 수익이 나는 구조이기 때문에, 병원의 얼굴이 될 홈페이지를 먼저 투자해 제작합니다.',
+  },
+  {
+    q: '도메인·호스팅·유지 비용은 누가 부담하나요?',
+    a: '병원이 별도로 부담하는 비용은 없습니다. 시술 추가, 가격 변경 등 기본 업데이트도 요청 시 반영됩니다.',
+  },
+  {
+    q: '홈페이지 소유권은 누구에게 있나요?',
+    a: '홈페이지와 콘텐츠의 소유권은 병원에 있습니다.',
+  },
+  {
+    q: '의료광고법에 문제는 없나요?',
+    a: '치료 경험담, 과장·비교 광고 등 의료법상 금지되는 표현을 피해 의료광고 규정을 준수하는 가이드로 제작합니다.',
+  },
+  {
+    q: '제작 기간은 얼마나 걸리나요?',
+    a: '병원 자료 전달 후 2~4주 안에 초안을 드리고, 검토와 수정을 거쳐 오픈합니다.',
+  },
+  {
+    q: '어떤 진료과가 가능한가요?',
+    a: '피부과·성형외과 등 외국인 환자 수요가 있는 미용·의료 진료과 중심으로 입점 가능합니다. 그 외 진료과는 문의 시 안내드립니다.',
+  },
+  {
+    q: '입점을 해지하면 홈페이지는 어떻게 되나요?',
+    a: '유지 조건과 해지 시 처리 방식은 계약 전에 서면으로 명확하게 안내드립니다. 구두 설명이 아닌 계약서 기준으로 확인하실 수 있습니다.',
+  },
+];
+
+function FAQItem({ item, isOpen, toggle }: { item: typeof faqs[0]; isOpen: boolean; toggle: () => void }) {
+  return (
+    <div className="border-b border-slate-200 last:border-0">
+      <button onClick={toggle} className="w-full text-left py-5 flex items-start justify-between gap-4">
+        <span className="text-base sm:text-lg font-semibold text-slate-900">{item.q}</span>
+        <span className={`text-slate-400 text-2xl leading-none shrink-0 transition-transform duration-300 ${isOpen ? 'rotate-45' : ''}`}>+</span>
+      </button>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
+          >
+            <p className="pb-5 text-slate-500 leading-relaxed max-w-xl">{item.a}</p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
 /* ─────────── 가격 앵커 행 ─────────── */
 function PriceRow({ label, old, replacement }: { label: string; old: string; replacement: string }) {
   return (
@@ -86,6 +144,7 @@ function HospitalSiteMock() {
 /* ─────────── Main Page ─────────── */
 export default function VariantHPage() {
   const [showStickyBar, setShowStickyBar] = useState(false);
+  const [openFaq, setOpenFaq] = useState<number | null>(0);
   const formRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -408,7 +467,19 @@ export default function VariantHPage() {
             </div>
           </div>
         </section>
-        {/* SECTION:FAQ */}
+        {/* ═══════════ FAQ ═══════════ */}
+        <section className="bg-slate-50">
+          <div className="max-w-3xl mx-auto px-6 py-20 md:py-28">
+            <h2 className="text-3xl md:text-4xl font-black text-slate-900 leading-tight mb-12">
+              자주 묻는 질문
+            </h2>
+            <div>
+              {faqs.map((item, i) => (
+                <FAQItem key={i} item={item} isOpen={openFaq === i} toggle={() => setOpenFaq(openFaq === i ? null : i)} />
+              ))}
+            </div>
+          </div>
+        </section>
         {/* SECTION:CTA_FORM */}
       </main>
 
