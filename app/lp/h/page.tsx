@@ -16,22 +16,24 @@ const SITE_LANGS = [
 
 function HospitalSiteMock() {
   const [langIdx, setLangIdx] = useState(0);
+  const [autoKey, setAutoKey] = useState(0);
 
   useEffect(() => {
     const timer = setInterval(() => {
       setLangIdx(i => (i + 1) % SITE_LANGS.length);
     }, 2800);
     return () => clearInterval(timer);
-  }, []);
+  }, [autoKey]);
 
   const lang = SITE_LANGS[langIdx];
 
   return (
     <BrowserFrame url="gangnam-oo-clinic.com" className="w-full max-w-2xl">
       {/* 언어 탭 */}
-      <div className="flex items-center gap-1.5 px-4 py-2.5 bg-slate-50 border-b border-slate-100">
+      <div role="tablist" aria-label="홈페이지 언어" className="flex items-center gap-1.5 px-4 py-2.5 bg-slate-50 border-b border-slate-100">
         {SITE_LANGS.map((l, i) => (
-          <button key={l.tag} onClick={() => setLangIdx(i)}
+          <button key={l.tag} role="tab" aria-selected={i === langIdx}
+            onClick={() => { setLangIdx(i); setAutoKey(k => k + 1); }}
             className={`px-2.5 py-1 rounded-full text-[11px] font-bold transition-colors ${i === langIdx ? l.chipClass : 'bg-white text-slate-400 border border-slate-200'}`}>
             {l.tag}
           </button>
