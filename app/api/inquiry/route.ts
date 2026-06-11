@@ -6,6 +6,7 @@ interface InquiryData {
   phone: string;
   email?: string;
   message?: string;
+  source?: string;
 }
 
 export async function POST(request: NextRequest) {
@@ -68,6 +69,15 @@ export async function POST(request: NextRequest) {
                     title: '문의사항',
                     value: data.message,
                     short: false,
+                  },
+                ]
+              : []),
+            ...(data.source
+              ? [
+                  {
+                    title: '유입 경로',
+                    value: data.source,
+                    short: true,
                   },
                 ]
               : []),
