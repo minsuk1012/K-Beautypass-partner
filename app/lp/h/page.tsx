@@ -3,8 +3,80 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
-import { ArrowRight, ArrowDown, Check, MapPin, Search, Star, Globe, Store, Megaphone, Users } from 'lucide-react';
+import { ArrowRight, ArrowDown, Check, MapPin, Search, Star, Globe, Store, Megaphone, Users, Send, Loader2 } from 'lucide-react';
+import { trackInquirySubmit } from '../../lib/analytics';
 import BrowserFrame from '../../components/BrowserFrame';
+
+/* ─────────── Inline Inquiry Form ─────────── */
+function CompactInquiryForm() {
+  const [form, setForm] = useState({ hospitalName: '', managerName: '', phone: '', email: '', message: '' });
+  const [state, setState] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setState('loading');
+    try {
+      const res = await fetch('/api/inquiry', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...form, source: 'lp_h' }),
+      });
+      if (res.ok) {
+        trackInquirySubmit(form.hospitalName);
+        setState('success');
+        setForm({ hospitalName: '', managerName: '', phone: '', email: '', message: '' });
+      } else {
+        setState('error');
+      }
+    } catch { setState('error'); }
+  };
+
+  if (state === 'success') {
+    return (
+      <div className="text-center py-12">
+        <div className="w-14 h-14 rounded-full bg-emerald-100 flex items-center justify-center mx-auto mb-4">
+          <Check className="w-7 h-7 text-emerald-600" />
+        </div>
+        <p className="text-xl font-bold text-slate-900 mb-2">문의가 접수되었습니다</p>
+        <p className="text-slate-500 mb-6">담당자가 빠르게 연락드리겠습니다.</p>
+        <button onClick={() => setState('idle')} className="text-emerald-600 font-medium hover:underline">
+          추가 문의하기
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-3">
+      <div className="grid grid-cols-2 gap-3">
+        <input type="text" required placeholder="병원/클리닉명 *" value={form.hospitalName}
+          onChange={e => setForm(f => ({ ...f, hospitalName: e.target.value }))}
+          className="px-4 py-3 bg-slate-100 border-0 rounded-lg text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/30" />
+        <input type="text" required placeholder="담당자명 *" value={form.managerName}
+          onChange={e => setForm(f => ({ ...f, managerName: e.target.value }))}
+          className="px-4 py-3 bg-slate-100 border-0 rounded-lg text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/30" />
+      </div>
+      <div className="grid grid-cols-2 gap-3">
+        <input type="tel" required placeholder="연락처 * (010-0000-0000)" value={form.phone}
+          onChange={e => setForm(f => ({ ...f, phone: e.target.value }))}
+          className="px-4 py-3 bg-slate-100 border-0 rounded-lg text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/30" />
+        <input type="email" placeholder="이메일" value={form.email}
+          onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
+          className="px-4 py-3 bg-slate-100 border-0 rounded-lg text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/30" />
+      </div>
+      <textarea rows={2} placeholder="병원명, 진료과, 궁금하신 점을 남겨주세요." value={form.message}
+        onChange={e => setForm(f => ({ ...f, message: e.target.value }))}
+        className="w-full px-4 py-3 bg-slate-100 border-0 rounded-lg text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 resize-none" />
+      {state === 'error' && <p className="text-red-600 text-sm">전송에 실패했습니다. 다시 시도해주세요.</p>}
+      <button type="submit" disabled={state === 'loading'}
+        className="w-full py-3.5 bg-emerald-500 hover:bg-emerald-600 disabled:bg-slate-400 text-white font-bold rounded-lg flex items-center justify-center gap-2 transition-colors">
+        {state === 'loading'
+          ? <><Loader2 className="w-5 h-5 animate-spin" /> 전송 중...</>
+          : <><Send className="w-4 h-4" /> 0원 홈페이지 문의하기</>}
+      </button>
+    </form>
+  );
+}
 
 /* ─────────── FAQ ───────────
  * 주의: Q2/Q3/Q5/Q6/Q7 답변은 스펙(docs/variant-h-free-homepage.md)의 권장안.
@@ -480,7 +552,39 @@ export default function VariantHPage() {
             </div>
           </div>
         </section>
-        {/* SECTION:CTA_FORM */}
+        {/* ═══════════ CTA + FORM ═══════════ */}
+        <section ref={formRef} className="bg-slate-900 scroll-mt-14">
+          <div className="max-w-5xl mx-auto px-6 py-20 md:py-28">
+            <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+              <div>
+                <h2 className="text-3xl md:text-4xl font-black text-white leading-tight mb-6">
+                  홈페이지가 없어서 놓치던 환자,<br />이제 0원으로 잡으세요.
+                </h2>
+                <p className="text-slate-400 leading-relaxed mb-8">
+                  제작비 0원, 입점비 0원.<br />
+                  예약이 성사될 때만 수수료를 냅니다.
+                </p>
+                <div className="space-y-3">
+                  {['다국어 홈페이지 제작 0원', '입점비·월 이용료 0원', '초기 마케팅 플랫폼 부담', '외국인 체험단 3건 지원'].map(item => (
+                    <div key={item} className="flex items-center gap-3">
+                      <div className="w-5 h-5 rounded-full bg-emerald-500/20 flex items-center justify-center shrink-0">
+                        <Check className="w-3 h-3 text-emerald-400" />
+                      </div>
+                      <span className="text-slate-300 text-sm font-medium">{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="bg-white rounded-2xl p-6 sm:p-8">
+                <div className="mb-6">
+                  <h3 className="text-lg font-bold text-slate-900">0원 홈페이지 입점 문의</h3>
+                  <p className="text-xs text-slate-400 mt-1">정보를 남겨주시면 담당자가 연락드립니다.</p>
+                </div>
+                <CompactInquiryForm />
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
 
       {/* ── Footer ── */}
