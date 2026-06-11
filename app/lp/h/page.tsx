@@ -341,7 +341,48 @@ export default function VariantHPage() {
             </div>
           </div>
         </section>
-        {/* SECTION:WHY_FREE */}
+        {/* ═══════════ 왜 무료인가 — 신뢰 ═══════════ */}
+        <section id="why-free" className="bg-slate-50 scroll-mt-14">
+          <div className="max-w-5xl mx-auto px-6 py-20 md:py-28">
+            <h2 className="text-3xl md:text-4xl font-black text-slate-900 leading-tight mb-4 text-center">
+              병원이 잘돼야, 우리도 법니다.
+            </h2>
+            <p className="text-slate-500 text-center max-w-2xl mx-auto mb-14 leading-relaxed">
+              홈페이지 제작비, 입점비, 월 이용료를 받지 않습니다. 예약이 성사되지 않으면 KBP의 수익도 0원입니다.<br className="hidden md:block" />
+              그래서 병원의 얼굴이 될 홈페이지부터 우리가 먼저 투자합니다.
+            </p>
+
+            <div className="grid md:grid-cols-3 gap-px bg-slate-200 rounded-2xl overflow-hidden mb-10">
+              {[
+                { step: '01', title: '외국인 환자가 예약', desc: 'KBP 플랫폼과 다국어 홈페이지를 통해 환자가 예약합니다.' },
+                { step: '02', title: '시술 완료', desc: '병원은 진료에만 집중하면 됩니다.' },
+                { step: '03', title: '그때만 수수료 15%', desc: '예약이 없으면 비용도 0원입니다.' },
+              ].map((item, i) => (
+                <div key={item.step} className="bg-white p-8 md:p-10 relative">
+                  {i < 2 && (
+                    <div className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 z-10 w-8 h-8 rounded-full bg-slate-50 border-2 border-slate-200 items-center justify-center">
+                      <ArrowRight size={14} className="text-slate-400" />
+                    </div>
+                  )}
+                  <span className="text-emerald-600 text-sm font-bold">{item.step}</span>
+                  <h3 className="text-xl font-bold text-slate-900 mt-2 mb-3">{item.title}</h3>
+                  <p className="text-slate-500 text-sm leading-relaxed">{item.desc}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="flex flex-wrap justify-center gap-x-6 gap-y-3">
+              {['입점비 0원', '제작비 0원', '월 이용료 0원', '광고비 0원'].map(item => (
+                <div key={item} className="flex items-center gap-2">
+                  <div className="w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center shrink-0">
+                    <Check className="w-3 h-3 text-emerald-600" />
+                  </div>
+                  <span className="text-slate-700 text-sm font-bold">{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
         {/* SECTION:PROCESS */}
         {/* SECTION:FAQ */}
         {/* SECTION:CTA_FORM */}
