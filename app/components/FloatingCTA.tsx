@@ -2,15 +2,21 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { usePathname } from "next/navigation";
 import { trackPartnerServiceClick } from "../lib/analytics";
 
 export default function FloatingCTA() {
+  const pathname = usePathname();
   const [showTooltip, setShowTooltip] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => setShowTooltip(true), 1500);
     return () => clearTimeout(timer);
   }, []);
+
+  if (pathname === "/lp/h") {
+    return null;
+  }
 
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
