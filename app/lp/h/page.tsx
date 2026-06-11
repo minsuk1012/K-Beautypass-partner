@@ -12,8 +12,8 @@ function PriceRow({ label, old, replacement }: { label: string; old: string; rep
     <div className="flex items-baseline justify-between py-4 border-b border-slate-200/60 last:border-0">
       <span className="text-slate-600 text-sm sm:text-base">{label}</span>
       <div className="flex items-baseline gap-4">
-        <span className="text-red-500 line-through text-sm">{old}</span>
-        <span className="font-bold text-emerald-600">{replacement}</span>
+        <span aria-label={`기존 ${old}`} className="text-red-500 line-through text-sm">{old}</span>
+        <span aria-label={`KBP 입점 시 ${replacement}`} className="font-bold text-emerald-600">{replacement}</span>
       </div>
     </div>
   );
@@ -331,10 +331,12 @@ export default function VariantHPage() {
 
             <div className="max-w-3xl mx-auto">
               <h3 className="text-xl font-bold text-slate-900 mb-6">일반 제작사와 비교하면</h3>
-              <PriceRow label="홈페이지 제작비" old="300~1,000만원+" replacement="0원" />
-              <PriceRow label="다국어 페이지 추가" old="언어당 별도 견적" replacement="포함" />
-              <PriceRow label="모바일 반응형" old="옵션 별도" replacement="기본 포함" />
-              <PriceRow label="월 유지보수" old="별도" replacement="0원" />
+              <div>
+                <PriceRow label="홈페이지 제작비" old="300~1,000만원+" replacement="0원" />
+                <PriceRow label="다국어 페이지 추가" old="언어당 별도 견적" replacement="포함" />
+                <PriceRow label="모바일 반응형" old="옵션 별도" replacement="기본 포함" />
+                <PriceRow label="월 유지보수" old="별도" replacement="0원" />
+              </div>
               <p className="text-xs text-slate-400 mt-4">* 일반 제작사 시세는 보수적 범위 기준입니다.</p>
             </div>
           </div>
