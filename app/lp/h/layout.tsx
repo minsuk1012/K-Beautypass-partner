@@ -1,4 +1,7 @@
 import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: '병원 홈페이지, 다국어까지 0원 제작 | KBEAUTYPASS 파트너',
@@ -7,5 +10,17 @@ export const metadata: Metadata = {
 };
 
 export default function VariantHLayout({ children }: { children: React.ReactNode }) {
-  return children;
+  return (
+    <>
+      {/* Pretendard Variable: Inter와 메트릭 호환되는 한글 폰트 (Untitled UI 한글 페어링) */}
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
+        precedence="default"
+      />
+      <div style={{ fontFamily: `${inter.style.fontFamily}, 'Pretendard Variable', Pretendard, -apple-system, sans-serif` }}>
+        {children}
+      </div>
+    </>
+  );
 }
