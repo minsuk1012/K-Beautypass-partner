@@ -214,10 +214,14 @@ export default function VariantHPage() {
                     <span className="text-sm text-slate-700 font-medium">skin clinic gangnam</span>
                   </div>
                   <div className="space-y-3">
-                    {['Gangnam A Dermatology Clinic', 'B Skin & Laser Clinic', 'Seoul C Aesthetic Clinic'].map(name => (
-                      <div key={name}>
-                        <p className="text-sm font-medium text-blue-700">{name}</p>
-                        <p className="text-[11px] text-emerald-700">www.{name.split(' ')[0].toLowerCase()}-clinic.com</p>
+                    {[
+                      { name: 'Gangnam A Dermatology Clinic', url: 'www.gangnam-a-skin.com' },
+                      { name: 'B Skin & Laser Clinic', url: 'www.bskinlaser.com' },
+                      { name: 'Seoul C Aesthetic Clinic', url: 'www.seoul-c-aesthetic.com' },
+                    ].map(item => (
+                      <div key={item.name}>
+                        <p className="text-sm font-medium text-blue-700">{item.name}</p>
+                        <p className="text-[11px] text-emerald-700">{item.url}</p>
                       </div>
                     ))}
                     <div className="border-2 border-dashed border-red-200 rounded-lg px-3 py-2.5 text-center">
