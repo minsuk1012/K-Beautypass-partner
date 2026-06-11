@@ -383,7 +383,31 @@ export default function VariantHPage() {
             </div>
           </div>
         </section>
-        {/* SECTION:PROCESS */}
+        {/* ═══════════ 프로세스 — 4단계 ═══════════ */}
+        <section className="bg-white">
+          <div className="max-w-5xl mx-auto px-6 py-20 md:py-28">
+            <h2 className="text-3xl md:text-4xl font-black text-slate-900 leading-tight mb-14 text-center">
+              문의부터 오픈까지, 4단계면 끝납니다.
+            </h2>
+
+            <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4">
+              {[
+                { step: '1', title: '입점 문의', desc: '아래 폼 작성 1분이면 됩니다.' },
+                { step: '2', title: '상담 & 자료 전달', desc: '병원 정보와 시술 목록을 전달해 주세요.' },
+                { step: '3', title: '제작 & 검수', desc: '초안 제작 후 병원 검토·수정을 거칩니다. (2~4주)' },
+                { step: '4', title: '오픈 + 입점', desc: '홈페이지 오픈과 KBP 입점이 동시에 진행됩니다.' },
+              ].map(item => (
+                <div key={item.step} className="bg-slate-50 border border-slate-200 rounded-2xl p-6">
+                  <div className="w-8 h-8 rounded-full bg-emerald-500 text-white text-sm font-black flex items-center justify-center mb-4">
+                    {item.step}
+                  </div>
+                  <h3 className="font-bold text-slate-900 mb-2">{item.title}</h3>
+                  <p className="text-slate-500 text-sm leading-relaxed">{item.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
         {/* SECTION:FAQ */}
         {/* SECTION:CTA_FORM */}
       </main>
