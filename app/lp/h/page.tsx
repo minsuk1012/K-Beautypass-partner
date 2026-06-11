@@ -69,7 +69,7 @@ export default function VariantHPage() {
             animate={{ y: 0 }}
             exit={{ y: 80 }}
             transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
-            className="fixed bottom-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-t border-slate-200 py-3 px-6"
+            className="fixed bottom-0 left-0 right-0 z-40 bg-white/90 backdrop-blur-md border-t border-slate-200 py-3 px-6"
           >
             <div className="max-w-5xl mx-auto flex items-center justify-between gap-4">
               <div className="hidden sm:block">
